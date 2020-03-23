@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<SourceFileCollection xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Profile>Reach</Profile>
+  <Platform>Windows</Platform>
+  <Config />
+  <SourceFiles>
+    <File>D:/Stuff/Goaway/NickSchultz/AG247/AGGP247c-master/Labs/Lab5/NickSchultzLab05/SpaceWar(Clone)/DrawingExample/DrawingExample/Content/cartoon.png</File>
+    <File>D:/Stuff/Goaway/NickSchultz/AG247/AGGP247c-master/Labs/Lab5/NickSchultzLab05/SpaceWar(Clone)/DrawingExample/DrawingExample/Content/rocket.png</File>
+    <File>D:/Stuff/Goaway/NickSchultz/AG247/AGGP247c-master/Labs/Lab5/NickSchultzLab05/SpaceWar(Clone)/DrawingExample/DrawingExample/Content/rocket-312767_640.png</File>
+    <File>D:/Stuff/Goaway/NickSchultz/AG247/AGGP247c-master/Labs/Lab5/NickSchultzLab05/SpaceWar(Clone)/DrawingExample/DrawingExample/Content/Space-PNG-Pic.png</File>
+    <File>D:/Stuff/Goaway/NickSchultz/AG247/AGGP247c-master/Labs/Lab5/NickSchultzLab05/SpaceWar(Clone)/DrawingExample/DrawingExample/Content/THEFONT.spritefont</File>
+  </SourceFiles>
+  <DestFiles>
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File>BigRed.png</File>
+    <File>Space.png</File>
+    <File xsi:nil="true" />
+  </DestFiles>
+</SourceFileCollection>
