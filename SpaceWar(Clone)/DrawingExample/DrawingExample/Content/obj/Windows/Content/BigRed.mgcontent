@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <SourceFile>D:/Stuff/Goaway/NickSchultz/AG247/AGGP247c-master/Labs/Lab5/NickSchultzLab05/SpaceWar(Clone)/DrawingExample/DrawingExample/Content/rocket-312767_640.png</SourceFile>
-  <SourceTime>2020-03-09T15:03:11.1197611-04:00</SourceTime>
-  <DestFile>D:/Stuff/Goaway/NickSchultz/AG247/AGGP247c-master/Labs/Lab5/NickSchultzLab05/SpaceWar(Clone)/DrawingExample/DrawingExample/Content/bin/Windows/Content/BigRed.xnb</DestFile>
-  <DestTime>2020-03-09T15:09:32.7980147-04:00</DestTime>
+  <SourceFile>D:/GIT/AGGP247Final-SpaceWar-Clone/SpaceWar(Clone)/DrawingExample/DrawingExample/Content/rocket-312767_640.png</SourceFile>
+  <SourceTime>2020-04-06T14:22:06.1497346-04:00</SourceTime>
+  <DestFile>D:/GIT/AGGP247Final-SpaceWar-Clone/SpaceWar(Clone)/DrawingExample/DrawingExample/Content/bin/Windows/Content/BigRed.xnb</DestFile>
+  <DestTime>2020-04-06T14:23:49.2196684-04:00</DestTime>
   <Importer>TextureImporter</Importer>
-  <ImporterTime>2018-12-08T11:35:54-05:00</ImporterTime>
+  <ImporterTime>2018-09-23T17:55:52-04:00</ImporterTime>
   <Processor>TextureProcessor</Processor>
-  <ProcessorTime>2018-12-08T11:35:54-05:00</ProcessorTime>
+  <ProcessorTime>2018-09-23T17:55:52-04:00</ProcessorTime>
   <Parameters>
     <Key>ColorKeyColor</Key>
     <Value>255,0,255,255</Value>

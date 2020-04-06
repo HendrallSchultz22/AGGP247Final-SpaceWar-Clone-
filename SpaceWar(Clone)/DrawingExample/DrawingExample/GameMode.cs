@@ -22,8 +22,11 @@ namespace DrawingExample
         SpriteFont New;
         Grid2D theGrid;
 
-        Sprite BigRedShip;
-        Sprite RocketShip;
+        // #### HUD ####
+        HUD hud; 
+
+        public Sprite BigRedShip;
+        public Sprite RocketShip;
         Sprite Starfield;
         Vector2 Player1Loc = new Vector2(60, 645);
         Vector2 Player2Loc = new Vector2(1600, 700);
@@ -62,6 +65,9 @@ namespace DrawingExample
         {
             
             New = Content.Load<SpriteFont>("THEFONT");
+
+            // #### HUD ####
+            hud = new HUD();  
 
             BigRedShip = new Sprite("BigRed");
             BigRedShip.scale = .2f;
@@ -235,7 +241,9 @@ namespace DrawingExample
             {
 
             }
-          
+
+            // #### HUD ####
+            hud.Update(gameTime); 
 
         }
 
@@ -262,9 +270,19 @@ namespace DrawingExample
             {
                 LinePrimatives.DrawSolidCircle(spriteBatch, Color.DarkRed, Player1Loc, HitBox);
             }
-            
+
+            // ######
+            // This is where you are drawing your Hud Elements. 
+
+            // Your Original Code 
+            /*
             spriteBatch.DrawString(New, "Cartoonship Position: " + VectorToString(BigRedShip.position), new Vector2(10, 5), Color.Azure);
             spriteBatch.DrawString(New, "Rocketship Position: " + VectorToString(RocketShip.position), new Vector2(10, 30), Color.Azure);
+            */
+
+            // #### HUD ####
+            // Your original code has been replaced with a call to the HUD Class... 
+            hud.Draw(spriteBatch);
 
             spriteBatch.End();
 
