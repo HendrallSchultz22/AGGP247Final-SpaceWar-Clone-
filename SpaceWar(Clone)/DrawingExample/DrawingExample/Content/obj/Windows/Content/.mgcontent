@@ -4,17 +4,19 @@
   <Platform>Windows</Platform>
   <Config />
   <SourceFiles>
-    <File>D:/GIT/AGGP247Final-SpaceWar-Clone/SpaceWar(Clone)/DrawingExample/DrawingExample/Content/cartoon.png</File>
-    <File>D:/GIT/AGGP247Final-SpaceWar-Clone/SpaceWar(Clone)/DrawingExample/DrawingExample/Content/rocket.png</File>
-    <File>D:/GIT/AGGP247Final-SpaceWar-Clone/SpaceWar(Clone)/DrawingExample/DrawingExample/Content/rocket-312767_640.png</File>
-    <File>D:/GIT/AGGP247Final-SpaceWar-Clone/SpaceWar(Clone)/DrawingExample/DrawingExample/Content/Space-PNG-Pic.png</File>
-    <File>D:/GIT/AGGP247Final-SpaceWar-Clone/SpaceWar(Clone)/DrawingExample/DrawingExample/Content/THEFONT.spritefont</File>
+    <File>C:/Users/Lunao/OneDrive/Documents/GitHub/AGGP247Final-SpaceWar-Clone-/SpaceWar(Clone)/DrawingExample/DrawingExample/Content/cartoon.png</File>
+    <File>C:/Users/Lunao/OneDrive/Documents/GitHub/AGGP247Final-SpaceWar-Clone-/SpaceWar(Clone)/DrawingExample/DrawingExample/Content/rocket.png</File>
+    <File>C:/Users/Lunao/OneDrive/Documents/GitHub/AGGP247Final-SpaceWar-Clone-/SpaceWar(Clone)/DrawingExample/DrawingExample/Content/rocket-312767_640.png</File>
+    <File>C:/Users/Lunao/OneDrive/Documents/GitHub/AGGP247Final-SpaceWar-Clone-/SpaceWar(Clone)/DrawingExample/DrawingExample/Content/Space-PNG-Pic.png</File>
+    <File>C:/Users/Lunao/OneDrive/Documents/GitHub/AGGP247Final-SpaceWar-Clone-/SpaceWar(Clone)/DrawingExample/DrawingExample/Content/THEFONT.spritefont</File>
+    <File>C:/Users/Lunao/OneDrive/Documents/GitHub/AGGP247Final-SpaceWar-Clone-/SpaceWar(Clone)/DrawingExample/DrawingExample/Content/torpedo.png</File>
   </SourceFiles>
   <DestFiles>
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File>BigRed.png</File>
     <File>Space.png</File>
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
   </DestFiles>
 </SourceFileCollection>

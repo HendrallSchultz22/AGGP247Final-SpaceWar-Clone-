@@ -29,19 +29,25 @@ namespace DrawingExample
         /// <summary>
         /// Max number of Game Pads to look for
         /// </summary>
-        protected int MaxGamePads= 4; 
+        protected int MaxGamePads = 4;
 
         /// <summary>
         /// Color to Clear the Screen With
         /// </summary>
-        public Color clearColor = Color.Black; 
+        public Color clearColor = Color.Black;
+
+        public List<BaseGameObject> SceneList;
+        public List<BaseGameObject> DestroyList;
 
         public GameApp()
         {
-            instance = this; 
+            instance = this;
             graphics = new GraphicsDeviceManager(this);
-            
+
             Content.RootDirectory = "Content";
+
+            SceneList = new List<BaseGameObject>();
+            DestroyList = new List<BaseGameObject>();
         }
 
         /// <summary>
@@ -63,7 +69,7 @@ namespace DrawingExample
             }
 
             // Initalizing the spritebatch for drawing
-            LineDrawer.InitateLineDrawer(GraphicsDevice); 
+            LineDrawer.InitateLineDrawer(GraphicsDevice);
             spriteBatch = new SpriteBatch(GraphicsDevice);
             base.Initialize();
         }
@@ -109,6 +115,26 @@ namespace DrawingExample
             // and then assign previous to the current after. 
             GameUpdate(gameTime);
 
+            // Update All Objects
+            if (SceneList.Count > 0)
+            {
+                foreach (BaseGameObject go in SceneList)
+                {
+                    go.ObjectUpdate(gameTime);
+                }
+            }
+
+            // Clean up objects that are for Destruction
+            if (DestroyList.Count > 0)
+            {
+                foreach (BaseGameObject go in DestroyList)
+                {
+                    SceneList.Remove(go);
+                }
+                DestroyList.Clear();
+            }
+
+
             // Setting Current to Previous for next game tick
             keyboardPrevious = keyboardCurrent;
             mousePrevious = mouseCurrent;
@@ -123,6 +149,33 @@ namespace DrawingExample
 
         }
 
+        protected override void Draw(GameTime gameTime)
+        {
+            GraphicsDevice.Clear(clearColor);
+
+            spriteBatch.Begin();
+
+            // Draw items in our Scene List
+            foreach (BaseGameObject go in SceneList)
+            {
+                go.ObjectDraw(spriteBatch);
+
+            }
+
+            GameDraw(gameTime);
+
+
+            spriteBatch.End();
+
+            base.Draw(gameTime);
+        }
+
+        protected virtual void GameDraw(GameTime gameTime)
+        {
+            // Exit Application Code should be in GameMode
+
+        }
+
         //Utility Functions 
 
         /// <summary>
@@ -132,7 +185,7 @@ namespace DrawingExample
         /// <returns>bool</returns>
         public bool IsKeyPressed(Keys key)
         {
-            return (keyboardCurrent.IsKeyDown(key) && keyboardPrevious.IsKeyUp(key)); 
+            return (keyboardCurrent.IsKeyDown(key) && keyboardPrevious.IsKeyUp(key));
         }
 
         /// <summary>

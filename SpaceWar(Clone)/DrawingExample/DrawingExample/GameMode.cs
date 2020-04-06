@@ -33,16 +33,20 @@ namespace DrawingExample
         public bool is1Filled = false;
         public bool is2Filled = false;
         public float HitBox = 86;
-       
+
+        public List<BaseGameObject> InGameList;
+        public List<BaseGameObject> DestroyObjectList;
+
         /// <summary>
         /// Public contstructor... Does need to do anything at all. Those are the best constructors. 
         /// </summary>
         public GameMode() : base() { }
-      
+
+
         protected override void Initialize()
         {
             base.Initialize();
-
+            
             // Setting up Screen Resolution
             // Read more here: http://rbwhitaker.wikidot.com/changing-the-window-size
             graphics.PreferredBackBufferWidth = 1640;
@@ -52,8 +56,9 @@ namespace DrawingExample
 
             theGrid = new Grid2D();
             IsMouseVisible = true;
+            InGameList = new List<BaseGameObject>();
+            DestroyObjectList = new List<BaseGameObject>();
 
-        
 
         }
 
@@ -90,6 +95,20 @@ namespace DrawingExample
             Starfield.origin.X = Starfield.texture.Width;
             Starfield.origin.Y = Starfield.texture.Height;
             // TODO: use this.Content to load your game content here
+        }
+
+        public void TorpedoShot1(GameTime gameTime)
+        {
+            Torpedo T = new Torpedo();
+            T.Position = BigRedShip.position;
+            T.Velocity = LinePrimatives.AngleToV2(MathHelper.ToDegrees(BigRedShip.rotation), T.MovementSpeed);
+        }
+
+        public void TorpedoShot2(GameTime gameTime)
+        {
+            Torpedo T = new Torpedo();
+            T.Position = RocketShip.position;
+            T.Velocity = LinePrimatives.AngleToV2(MathHelper.ToDegrees(RocketShip.rotation), T.MovementSpeed);
         }
         public string VectorToString(Vector2 v)
         {
@@ -129,33 +148,7 @@ namespace DrawingExample
                 is2Filled = false;
             }
 
-            //if (rec.Contains(CurrentMousePos))
-            //{
-            //    FillRectangle = true;
-            //}
-            //else
-            //{
-            //    FillRectangle = false;
-            //}
-
-            //if(LinePrimatives.IsInTriangle(CurrentMousePos, TPoint1, TPoint2, TPoint3))
-            //{
-            //    FillTriangle = true;
-            //}
-            //else
-            //{
-            //    FillTriangle = false;
-            //}
-
-            //offset += gameTime.ElapsedGameTime.Milliseconds;
-            //if (Keyboard.GetState().IsKeyDown(Keys.Space))
-            //{
-            //    OnBool = true;
-            //}
-            //else
-            //{
-            //    OnBool = false;
-            //}
+            
 
             if (Keyboard.GetState().IsKeyDown(Keys.Escape))
             {
@@ -205,7 +198,7 @@ namespace DrawingExample
             }
             if (IsKeyPressed(Keys.U))
             {
-
+                TorpedoShot1(gameTime);
             }
 
             //RocketShip Controls.
@@ -239,7 +232,24 @@ namespace DrawingExample
             }
             if (IsKeyPressed(Keys.R))
             {
+                TorpedoShot2(gameTime);
+            }
 
+            if (InGameList.Count > 0)
+            {
+                foreach (BaseGameObject Obj in InGameList)
+                {
+                    Obj.ObjectUpdate(gameTime);
+                }
+            }
+
+            if (DestroyObjectList.Count > 0)
+            {
+                foreach (BaseGameObject Obj in DestroyObjectList)
+                {
+                    InGameList.Remove(Obj);
+                }
+                DestroyObjectList.Clear();
             }
 
             // #### HUD ####
@@ -271,6 +281,10 @@ namespace DrawingExample
                 LinePrimatives.DrawSolidCircle(spriteBatch, Color.DarkRed, Player1Loc, HitBox);
             }
 
+            foreach(BaseGameObject Obj in InGameList)
+            {
+                Obj.ObjectDraw(spriteBatch);
+            }
             // ######
             // This is where you are drawing your Hud Elements. 
 
@@ -282,7 +296,7 @@ namespace DrawingExample
 
             // #### HUD ####
             // Your original code has been replaced with a call to the HUD Class... 
-            hud.Draw(spriteBatch);
+            //hud.Draw(spriteBatch);
 
             spriteBatch.End();
 

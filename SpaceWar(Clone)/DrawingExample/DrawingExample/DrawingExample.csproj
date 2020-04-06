@@ -41,7 +41,9 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="External\BaseGameObject.cs" />
     <Compile Include="External\Circle.cs" />
+    <Compile Include="External\Torpedo.cs" />
     <Compile Include="External\Triangle.cs" />
     <Compile Include="Grid2D.cs" />
     <Compile Include="External\Elipse.cs" />
