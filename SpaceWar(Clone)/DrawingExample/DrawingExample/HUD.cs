@@ -8,15 +8,15 @@ using LineDraw;
 namespace DrawingExample
 {
 
-    public class HUD
+    class HUD
     {
         SpriteFont drawFont;
-        string CartoonVector = "";
-        string RocketVector = "";
+        string BigRedVector = "";
+        string BigBlueVector = "";
 
         public HUD()
         {
-            Initalize(); 
+            Initalize();
         }
 
         public void Initalize()
@@ -37,17 +37,17 @@ namespace DrawingExample
         public void Update(GameTime gameTime)
         {
 
-            RocketVector  = VectorToString( ((GameMode)GameMode.instance).RocketShip.position);
-            CartoonVector = VectorToString( ((GameMode)GameMode.instance).BigRedShip.position);
+            BigBlueVector = VectorToString(((GameMode)GameMode.instance).BigBlueShip.position);
+            BigRedVector = VectorToString(((GameMode)GameMode.instance).BigRedShip.position);
 
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.DrawString(drawFont, "Cartoonship Position: " + CartoonVector,
-                new Vector2(10, 5), Color.Azure);
-            spriteBatch.DrawString(drawFont, "Rocketship Position: " + RocketVector
-                , new Vector2(10, 30), Color.Azure);
+            spriteBatch.DrawString(drawFont, "BigRedship Position: " + BigRedVector,
+                new Vector2(10, 30), Color.Azure);
+            spriteBatch.DrawString(drawFont, "BigBlueship Position: " + BigBlueVector
+                , new Vector2(10, 5), Color.Azure);
         }
     }
 

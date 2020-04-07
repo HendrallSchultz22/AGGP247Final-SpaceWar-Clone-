@@ -36,8 +36,8 @@ namespace DrawingExample
         /// </summary>
         public Color clearColor = Color.Black;
 
-        public List<BaseGameObject> SceneList;
-        public List<BaseGameObject> DestroyList;
+        public List<BaseGameObject> InGameList;
+        public List<BaseGameObject> DestroyObjectList;
 
         public GameApp()
         {
@@ -46,8 +46,8 @@ namespace DrawingExample
 
             Content.RootDirectory = "Content";
 
-            SceneList = new List<BaseGameObject>();
-            DestroyList = new List<BaseGameObject>();
+            InGameList = new List<BaseGameObject>();
+            DestroyObjectList = new List<BaseGameObject>();
         }
 
         /// <summary>
@@ -116,22 +116,22 @@ namespace DrawingExample
             GameUpdate(gameTime);
 
             // Update All Objects
-            if (SceneList.Count > 0)
+            if (InGameList.Count > 0)
             {
-                foreach (BaseGameObject go in SceneList)
+                foreach (BaseGameObject go in InGameList)
                 {
                     go.ObjectUpdate(gameTime);
                 }
             }
 
             // Clean up objects that are for Destruction
-            if (DestroyList.Count > 0)
+            if (DestroyObjectList.Count > 0)
             {
-                foreach (BaseGameObject go in DestroyList)
+                foreach (BaseGameObject go in DestroyObjectList)
                 {
-                    SceneList.Remove(go);
+                    InGameList.Remove(go);
                 }
-                DestroyList.Clear();
+                DestroyObjectList.Clear();
             }
 
 
@@ -149,32 +149,8 @@ namespace DrawingExample
 
         }
 
-        protected override void Draw(GameTime gameTime)
-        {
-            GraphicsDevice.Clear(clearColor);
-
-            spriteBatch.Begin();
-
-            // Draw items in our Scene List
-            foreach (BaseGameObject go in SceneList)
-            {
-                go.ObjectDraw(spriteBatch);
-
-            }
-
-            GameDraw(gameTime);
-
-
-            spriteBatch.End();
-
-            base.Draw(gameTime);
-        }
-
-        protected virtual void GameDraw(GameTime gameTime)
-        {
-            // Exit Application Code should be in GameMode
-
-        }
+       
+        
 
         //Utility Functions 
 

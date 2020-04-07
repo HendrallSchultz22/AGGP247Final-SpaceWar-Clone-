@@ -13,7 +13,7 @@ namespace DrawingExample
     class Torpedo : BaseGameObject
     {
         private Sprite TorpedoSprite;
-
+        GameMode Game;
         public float MovementSpeed;
         public Rectangle TorpedoCollison;
 
@@ -41,10 +41,12 @@ namespace DrawingExample
         {
             TorpedoCollison.Location = Position.ToPoint();
 
-            if ((Position.X >= ScreenSize.X || Position.Y >= ScreenSize.Y) || (Position.X <= 0 || Position.Y <= 0))
-            {
-                Destroy();
-            }
+            //if ((Position.X >= ScreenSize.X || Position.Y >= ScreenSize.Y) || (Position.X <= 0 || Position.Y <= 0))
+            //{
+            //    Destroy();
+            //}
+
+            
         }
 
         public override void Draw(SpriteBatch spriteBatch)

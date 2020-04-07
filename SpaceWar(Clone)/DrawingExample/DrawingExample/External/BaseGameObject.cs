@@ -24,7 +24,7 @@ namespace DrawingExample
 
         public BaseGameObject()
         {
-            GameApp.instance.SceneList.Add(this);
+            ((GameMode)GameMode.instance).InGameList.Add(this);
 
             InitalizeObject();
         }
@@ -82,7 +82,7 @@ namespace DrawingExample
         public void Destroy()
         {
             OnDestroy();
-            GameApp.instance.SceneList.Remove(this);
+            ((GameMode)GameMode.instance).InGameList.Remove(this);
         }
 
         public virtual void OnDestroy()

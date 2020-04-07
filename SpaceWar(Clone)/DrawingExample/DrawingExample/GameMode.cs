@@ -23,13 +23,14 @@ namespace DrawingExample
         Grid2D theGrid;
 
         // #### HUD ####
-        HUD hud; 
+        HUD hud;
 
         public Sprite BigRedShip;
-        public Sprite RocketShip;
-        Sprite Starfield;
-        Vector2 Player1Loc = new Vector2(60, 645);
-        Vector2 Player2Loc = new Vector2(1600, 700);
+        public Sprite BigBlueShip;
+        public Sprite Starfield;
+
+        Vector2 Player1Loc = new Vector2(80, 500);
+        Vector2 Player2Loc = new Vector2(1220, 465);
         public bool is1Filled = false;
         public bool is2Filled = false;
         public float HitBox = 86;
@@ -40,24 +41,25 @@ namespace DrawingExample
         /// <summary>
         /// Public contstructor... Does need to do anything at all. Those are the best constructors. 
         /// </summary>
-        public GameMode() : base() { }
-
+        public GameMode()
+        {
+            InGameList = new List<BaseGameObject>();
+            DestroyObjectList = new List<BaseGameObject>();
+        }
 
         protected override void Initialize()
         {
             base.Initialize();
-            
+
             // Setting up Screen Resolution
             // Read more here: http://rbwhitaker.wikidot.com/changing-the-window-size
-            graphics.PreferredBackBufferWidth = 1640;
-            graphics.PreferredBackBufferHeight = 1480;
+            graphics.PreferredBackBufferWidth = 1280;
+            graphics.PreferredBackBufferHeight = 960;
             graphics.IsFullScreen = false;
             graphics.ApplyChanges();
 
-            theGrid = new Grid2D();
+
             IsMouseVisible = true;
-            InGameList = new List<BaseGameObject>();
-            DestroyObjectList = new List<BaseGameObject>();
 
 
         }
@@ -68,25 +70,25 @@ namespace DrawingExample
         /// </summary>
         protected override void LoadContent()
         {
-            
+
+            // TODO: use this.Content to load your game content here
             New = Content.Load<SpriteFont>("THEFONT");
 
             // #### HUD ####
-            hud = new HUD();  
+            hud = new HUD();
 
             BigRedShip = new Sprite("BigRed");
             BigRedShip.scale = .2f;
             BigRedShip.position = Player2Loc;
-            
             BigRedShip.origin.X = BigRedShip.texture.Width / 2;
             BigRedShip.origin.Y = BigRedShip.texture.Height / 2;
 
 
-            RocketShip = new Sprite("rocket");
-            RocketShip.scale = .2f;
-            RocketShip.position = Player1Loc;
-            RocketShip.origin.X = RocketShip.texture.Width / 2;
-            RocketShip.origin.Y = RocketShip.texture.Height / 2;
+            BigBlueShip = new Sprite("BigBlue");
+            BigBlueShip.scale = .2f;
+            BigBlueShip.position = Player1Loc;
+            BigBlueShip.origin.X = BigBlueShip.texture.Width / 2;
+            BigBlueShip.origin.Y = BigBlueShip.texture.Height / 2;
 
 
             Starfield = new Sprite("Space");
@@ -94,30 +96,22 @@ namespace DrawingExample
             Starfield.position = new Vector2(1640, 1480);
             Starfield.origin.X = Starfield.texture.Width;
             Starfield.origin.Y = Starfield.texture.Height;
-            // TODO: use this.Content to load your game content here
         }
 
         public void TorpedoShot1(GameTime gameTime)
         {
             Torpedo T = new Torpedo();
-            T.Position = BigRedShip.position;
-            T.Velocity = LinePrimatives.AngleToV2(MathHelper.ToDegrees(BigRedShip.rotation), T.MovementSpeed);
+            T.Position = BigBlueShip.position;
+            T.Velocity = LinePrimatives.AngleToV2(MathHelper.ToDegrees(BigBlueShip.rotation), T.MovementSpeed);
         }
 
         public void TorpedoShot2(GameTime gameTime)
         {
             Torpedo T = new Torpedo();
-            T.Position = RocketShip.position;
-            T.Velocity = LinePrimatives.AngleToV2(MathHelper.ToDegrees(RocketShip.rotation), T.MovementSpeed);
+            T.Position = BigRedShip.position;
+            T.Velocity = LinePrimatives.AngleToV2(MathHelper.ToDegrees(BigRedShip.rotation), T.MovementSpeed);
         }
-        public string VectorToString(Vector2 v)
-        {
-            string result = "";
-
-            result = "X: (" + v.X.ToString("F1") + ") " + ", Y: (" + v.Y.ToString("F1") + ") ";
-
-            return result;
-        }
+       
         /// <summary>
         /// UnloadContent will be called once per game and is the place to unload
         /// game-specific content.
@@ -167,7 +161,7 @@ namespace DrawingExample
                 theGrid.Origin = mouseCurrent.Position.ToVector2(); 
             }
 
-            //CartoonShip Controls.
+            //BigRedShip Controls.
             if (IsKeyHeld(Keys.I) || IsKeyPressed(Keys.I))
             {
                 BigRedShip.position.Y -= 10;
@@ -196,44 +190,45 @@ namespace DrawingExample
             {
                 BigRedShip.rotation += 7 * (MathHelper.Pi / 180);
             }
-            if (IsKeyPressed(Keys.U))
+            if (IsKeyPressed(Keys.Y))
             {
-                TorpedoShot1(gameTime);
+                TorpedoShot2(gameTime);
             }
 
-            //RocketShip Controls.
+            //BigBlueShip Controls.
             if (IsKeyHeld(Keys.W) || IsKeyPressed(Keys.W))
             {
-                RocketShip.position.Y -= 10;
+                BigBlueShip.position.Y -= 10;
                 Player1Loc.Y -= 10;
             }
             if (IsKeyHeld(Keys.S) || IsKeyPressed(Keys.S))
             {
-                RocketShip.position.Y += 10;
+                BigBlueShip.position.Y += 10;
                 Player1Loc.Y += 10;
             }
             if (IsKeyHeld(Keys.A) || IsKeyPressed(Keys.A))
             {
-                RocketShip.position.X -= 10;
+                BigBlueShip.position.X -= 10;
                 Player1Loc.X -= 10;
             }
             if (IsKeyHeld(Keys.D) || IsKeyPressed(Keys.D))
             {
-                RocketShip.position.X += 10;
+                BigBlueShip.position.X += 10;
                 Player1Loc.X += 10;
             }
             if (IsKeyHeld(Keys.Q) || IsKeyPressed(Keys.Q))
             {
-                RocketShip.rotation -= 7 * (MathHelper.Pi / 180);  
+                BigBlueShip.rotation -= 7 * (MathHelper.Pi / 180);
             }
             if (IsKeyHeld(Keys.E) || IsKeyPressed(Keys.E))
             {
-                RocketShip.rotation += 7 * (MathHelper.Pi / 180);
+                BigBlueShip.rotation += 7 * (MathHelper.Pi / 180);
             }
             if (IsKeyPressed(Keys.R))
             {
-                TorpedoShot2(gameTime);
+                TorpedoShot1(gameTime);
             }
+
 
             if (InGameList.Count > 0)
             {
@@ -271,7 +266,7 @@ namespace DrawingExample
             LinePrimatives.DrawCircle(spriteBatch, 3f, Color.Transparent, Player2Loc, 60, 24);
             LinePrimatives.DrawCircle(spriteBatch, 3f, Color.Transparent, Player1Loc, 60, 24);
             BigRedShip.Draw(spriteBatch);
-            RocketShip.Draw(spriteBatch);
+            BigBlueShip.Draw(spriteBatch);
             if (is1Filled)
             {
                 LinePrimatives.DrawSolidCircle(spriteBatch, Color.DarkRed, Player2Loc, HitBox);
@@ -296,7 +291,7 @@ namespace DrawingExample
 
             // #### HUD ####
             // Your original code has been replaced with a call to the HUD Class... 
-            //hud.Draw(spriteBatch);
+            hud.Draw(spriteBatch);
 
             spriteBatch.End();
 

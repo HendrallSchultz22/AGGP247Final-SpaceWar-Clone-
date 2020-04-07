@@ -191,7 +191,6 @@ D:\GIT\AGGP247Final-SpaceWar-Clone\SpaceWar(Clone)\DrawingExample\DrawingExample
 D:\GIT\AGGP247Final-SpaceWar-Clone\SpaceWar(Clone)\DrawingExample\DrawingExample\obj\x86\Debug\DrawingExample.exe
 D:\GIT\AGGP247Final-SpaceWar-Clone\SpaceWar(Clone)\DrawingExample\DrawingExample\obj\x86\Debug\DrawingExample.pdb
 C:\Users\Lunao\OneDrive\Documents\GitHub\AGGP247Final-SpaceWar-Clone-\SpaceWar(Clone)\DrawingExample\DrawingExample\bin\Windows\x86\Debug\Content\BigRed.xnb
-C:\Users\Lunao\OneDrive\Documents\GitHub\AGGP247Final-SpaceWar-Clone-\SpaceWar(Clone)\DrawingExample\DrawingExample\bin\Windows\x86\Debug\Content\cartoon.xnb
 C:\Users\Lunao\OneDrive\Documents\GitHub\AGGP247Final-SpaceWar-Clone-\SpaceWar(Clone)\DrawingExample\DrawingExample\bin\Windows\x86\Debug\Content\rocket.xnb
 C:\Users\Lunao\OneDrive\Documents\GitHub\AGGP247Final-SpaceWar-Clone-\SpaceWar(Clone)\DrawingExample\DrawingExample\bin\Windows\x86\Debug\Content\Space.xnb
 C:\Users\Lunao\OneDrive\Documents\GitHub\AGGP247Final-SpaceWar-Clone-\SpaceWar(Clone)\DrawingExample\DrawingExample\bin\Windows\x86\Debug\Content\THEFONT.xnb
@@ -219,3 +218,4 @@ C:\Users\Lunao\OneDrive\Documents\GitHub\AGGP247Final-SpaceWar-Clone-\SpaceWar(C
 C:\Users\Lunao\OneDrive\Documents\GitHub\AGGP247Final-SpaceWar-Clone-\SpaceWar(Clone)\DrawingExample\DrawingExample\obj\x86\Debug\DrawingExample.csproj.CopyComplete
 C:\Users\Lunao\OneDrive\Documents\GitHub\AGGP247Final-SpaceWar-Clone-\SpaceWar(Clone)\DrawingExample\DrawingExample\obj\x86\Debug\DrawingExample.exe
 C:\Users\Lunao\OneDrive\Documents\GitHub\AGGP247Final-SpaceWar-Clone-\SpaceWar(Clone)\DrawingExample\DrawingExample\obj\x86\Debug\DrawingExample.pdb
+C:\Users\Lunao\OneDrive\Documents\GitHub\AGGP247Final-SpaceWar-Clone-\SpaceWar(Clone)\DrawingExample\DrawingExample\bin\Windows\x86\Debug\Content\BigBlue.xnb
