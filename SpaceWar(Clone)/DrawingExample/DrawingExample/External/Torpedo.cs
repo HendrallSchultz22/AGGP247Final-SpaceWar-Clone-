@@ -29,7 +29,7 @@ namespace DrawingExample
             TorpedoSprite.origin.X = TorpedoSprite.texture.Width / 2;
             TorpedoSprite.origin.Y = TorpedoSprite.texture.Height / 2;
 
-            MovementSpeed = 30f;
+            MovementSpeed = 70f;
 
             Velocity = LinePrimatives.AngleToV2(Rotation, MovementSpeed);
 
@@ -40,7 +40,10 @@ namespace DrawingExample
         public override void Update(GameTime gameTime)
         {
             TorpedoCollison.Location = Position.ToPoint();
-
+            if (TorpedoCollison.Contains(Game.BigRedShip.position))
+            {
+                Destroy();
+            }
             //if ((Position.X >= ScreenSize.X || Position.Y >= ScreenSize.Y) || (Position.X <= 0 || Position.Y <= 0))
             //{
             //    Destroy();
