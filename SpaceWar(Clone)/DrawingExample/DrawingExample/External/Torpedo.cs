@@ -13,7 +13,7 @@ namespace DrawingExample
     class Torpedo : BaseGameObject
     {
         private Sprite TorpedoSprite;
-        GameMode Game;
+        
         public float MovementSpeed;
         public Rectangle TorpedoCollison;
 
@@ -25,7 +25,7 @@ namespace DrawingExample
         public override void InitalizeObject()
         {
             TorpedoSprite = new Sprite("torpedo");
-            TorpedoSprite.scale = .765f;
+            TorpedoSprite.scale = .75f;
             TorpedoSprite.origin.X = TorpedoSprite.texture.Width / 2;
             TorpedoSprite.origin.Y = TorpedoSprite.texture.Height / 2;
 
@@ -40,7 +40,11 @@ namespace DrawingExample
         public override void Update(GameTime gameTime)
         {
             TorpedoCollison.Location = Position.ToPoint();
-            if (TorpedoCollison.Contains(Game.BigRedShip.position))
+
+            //**** This won't work
+            // check against everythign in the scene list instead. 
+
+            if (TorpedoCollison.Contains(((GameMode)GameMode.instance).BigRedShip.position))
             {
                 Destroy();
             }

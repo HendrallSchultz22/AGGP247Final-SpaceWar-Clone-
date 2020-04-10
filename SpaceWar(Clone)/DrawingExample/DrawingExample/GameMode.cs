@@ -35,16 +35,16 @@ namespace DrawingExample
         public bool is2Filled = false;
         public float HitBox = 86;
 
-        public List<BaseGameObject> InGameList;
-        public List<BaseGameObject> DestroyObjectList;
+       // public List<BaseGameObject> InGameList;
+        //public List<BaseGameObject> DestroyObjectList;
 
         /// <summary>
         /// Public contstructor... Does need to do anything at all. Those are the best constructors. 
         /// </summary>
         public GameMode()
         {
-            InGameList = new List<BaseGameObject>();
-            DestroyObjectList = new List<BaseGameObject>();
+            //InGameList = new List<BaseGameObject>();
+            //DestroyObjectList = new List<BaseGameObject>();
         }
 
         protected override void Initialize()
@@ -229,7 +229,7 @@ namespace DrawingExample
                 TorpedoShot1(gameTime);
             }
 
-
+            /*
             if (InGameList.Count > 0)
             {
                 foreach (BaseGameObject Obj in InGameList)
@@ -246,23 +246,25 @@ namespace DrawingExample
                 }
                 DestroyObjectList.Clear();
             }
-
+           */
             // #### HUD ####
             hud.Update(gameTime); 
+             
 
+        }
+
+        protected override void BackGroundDraw(GameTime gameTime)
+        {
+            Starfield.Draw(spriteBatch);
         }
 
         /// <summary>
         /// This is called when the game should draw itself.
         /// </summary>
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
-        protected override void Draw(GameTime gameTime)
+        protected override void GameDraw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(clearColor);
-
-            spriteBatch.Begin();
-
-            Starfield.Draw(spriteBatch);
+           
             LinePrimatives.DrawCircle(spriteBatch, 3f, Color.Transparent, Player2Loc, 60, 24);
             LinePrimatives.DrawCircle(spriteBatch, 3f, Color.Transparent, Player1Loc, 60, 24);
             BigRedShip.Draw(spriteBatch);
@@ -275,11 +277,13 @@ namespace DrawingExample
             {
                 LinePrimatives.DrawSolidCircle(spriteBatch, Color.DarkRed, Player1Loc, HitBox);
             }
+            
+        }
 
-            foreach(BaseGameObject Obj in InGameList)
-            {
-                Obj.ObjectDraw(spriteBatch);
-            }
+       
+
+        protected override void HudDraw(GameTime gameTime)
+        {
             // ######
             // This is where you are drawing your Hud Elements. 
 
@@ -288,14 +292,10 @@ namespace DrawingExample
             spriteBatch.DrawString(New, "Cartoonship Position: " + VectorToString(BigRedShip.position), new Vector2(10, 5), Color.Azure);
             spriteBatch.DrawString(New, "Rocketship Position: " + VectorToString(RocketShip.position), new Vector2(10, 30), Color.Azure);
             */
-
             // #### HUD ####
             // Your original code has been replaced with a call to the HUD Class... 
             hud.Draw(spriteBatch);
 
-            spriteBatch.End();
-
-            base.Draw(gameTime);
         }
     }
 }

@@ -149,8 +149,39 @@ namespace DrawingExample
 
         }
 
-       
-        
+        protected override void Draw(GameTime gameTime)
+        {
+            GraphicsDevice.Clear(clearColor);
+
+            spriteBatch.Begin();
+            BackGroundDraw(gameTime); 
+
+            foreach (BaseGameObject Obj in InGameList)
+            {
+                Obj.ObjectDraw(spriteBatch);
+            }
+
+            GameDraw(gameTime);
+            HudDraw(gameTime); 
+            spriteBatch.End();
+
+            base.Draw(gameTime);
+
+
+        }
+
+        protected virtual void GameDraw(GameTime gameTime)
+        {
+        }
+
+        protected virtual void BackGroundDraw(GameTime gameTime)
+        {
+        }
+
+        protected virtual void HudDraw(GameTime gameTime)
+        {
+        }
+
 
         //Utility Functions 
 
