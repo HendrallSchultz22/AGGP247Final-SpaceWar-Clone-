@@ -25,8 +25,10 @@ namespace DrawingExample
 
         PlayerClass player;
 
-        public Sprite Starfield;
+        PlanetObsticleClass sun;
 
+        public Sprite Starfield;
+        public bool SunOn = false;
         /// <summary>
         /// Public contstructor... Does need to do anything at all. Those are the best constructors. 
         /// </summary>
@@ -63,7 +65,10 @@ namespace DrawingExample
             hud = new HUD();
 
             player = new PlayerClass();
-            
+
+            sun = new PlanetObsticleClass();
+
+
             Starfield = new Sprite("Space");
             Starfield.scale = 2f;
             Starfield.position = new Vector2(1640, 1480);
@@ -90,6 +95,10 @@ namespace DrawingExample
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void GameUpdate(GameTime gameTime)
         {
+            if (Keyboard.GetState().IsKeyDown(Keys.Space))
+            {
+                SunOn = true;
+            }
             if (Keyboard.GetState().IsKeyDown(Keys.Escape))
             {
                 Exit();
@@ -179,6 +188,10 @@ namespace DrawingExample
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void GameDraw(GameTime gameTime)
         {
+            if(SunOn == true)
+            {
+                sun.Draw(spriteBatch);
+            }
             player.Draw(spriteBatch);
         }
 

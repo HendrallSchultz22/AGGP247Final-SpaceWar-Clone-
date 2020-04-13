@@ -61,8 +61,16 @@ namespace DrawingExample
 
         public override void Update(GameTime gameTime)
         {
-            RectCollison.Location = Position.ToPoint();
+            RectCollison.Location = Player1Loc.ToPoint();
+            RectCollison.Location = Player2Loc.ToPoint();
 
+            foreach (BaseGameObject go in GameApp.instance.InGameList)
+            {
+                if (RectCollison.Contains(go.RectCollison))
+                {
+                    Destroy(); 
+                }
+            }
             //player1
             if (BigBlueShip.position.X > ScreenSize.X)
             {
