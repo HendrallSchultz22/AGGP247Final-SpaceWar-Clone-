@@ -15,17 +15,16 @@ namespace DrawingExample
         private Sprite TorpedoSprite;
         
         public float MovementSpeed;
-        public Rectangle TorpedoCollison;
 
         public Torpedo()
         {
-
+           
         }
 
         public override void InitalizeObject()
         {
             TorpedoSprite = new Sprite("torpedo");
-            TorpedoSprite.scale = .75f;
+            TorpedoSprite.scale = .15f;
             TorpedoSprite.origin.X = TorpedoSprite.texture.Width / 2;
             TorpedoSprite.origin.Y = TorpedoSprite.texture.Height / 2;
 
@@ -33,25 +32,27 @@ namespace DrawingExample
 
             Velocity = LinePrimatives.AngleToV2(Rotation, MovementSpeed);
 
-            TorpedoCollison = new Rectangle(0, 0, TorpedoSprite.texture.Width, TorpedoSprite.texture.Height);
+            RectCollison = new Rectangle(0, 0, TorpedoSprite.texture.Width, TorpedoSprite.texture.Height);
 
         }
 
         public override void Update(GameTime gameTime)
         {
-            TorpedoCollison.Location = Position.ToPoint();
+            RectCollison.Location = Position.ToPoint();
 
             //**** This won't work
             // check against everythign in the scene list instead. 
-
-            if (TorpedoCollison.Contains(((GameMode)GameMode.instance).BigRedShip.position))
+            foreach (BaseGameObject go in GameApp.instance.InGameList)
             {
-                Destroy();
+                if (RectCollison.Contains(go.RectCollison))
+                {
+                    if(owner != go)
+                    {
+                        Destroy();
+                    }
+                }
             }
-            //if ((Position.X >= ScreenSize.X || Position.Y >= ScreenSize.Y) || (Position.X <= 0 || Position.Y <= 0))
-            //{
-            //    Destroy();
-            //}
+        
 
             
         }

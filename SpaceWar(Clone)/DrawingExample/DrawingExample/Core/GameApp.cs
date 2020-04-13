@@ -133,7 +133,7 @@ namespace DrawingExample
                 }
                 DestroyObjectList.Clear();
             }
-
+            
 
             // Setting Current to Previous for next game tick
             keyboardPrevious = keyboardCurrent;

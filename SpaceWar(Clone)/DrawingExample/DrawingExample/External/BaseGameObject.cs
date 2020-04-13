@@ -12,7 +12,7 @@ namespace DrawingExample
     public class BaseGameObject
     {
         public Vector2 ScreenSize = new Vector2(1280, 960);
-
+        public Vector2 AntiScreenSize = new Vector2(0, 0);
         public bool isActive = true;
         public Vector2 Position = Vector2.Zero;
         public Vector2 Scale = Vector2.Zero;
@@ -20,7 +20,10 @@ namespace DrawingExample
         public Vector2 Velocity;
         public bool HasMaxiumVelocity = false;
         public float MaxiumVelocity = float.MaxValue;
-
+        public Rectangle RectCollison;
+        public BaseGameObject owner;
+        public BaseGameObject player1;
+        public BaseGameObject player2;
 
         public BaseGameObject()
         {

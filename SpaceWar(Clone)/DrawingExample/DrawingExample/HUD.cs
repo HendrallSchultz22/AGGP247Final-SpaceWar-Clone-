@@ -37,8 +37,8 @@ namespace DrawingExample
         public void Update(GameTime gameTime)
         {
 
-            BigBlueVector = VectorToString(((GameMode)GameMode.instance).BigBlueShip.position);
-            BigRedVector = VectorToString(((GameMode)GameMode.instance).BigRedShip.position);
+            BigBlueVector = VectorToString(((PlayerClass)PlayerClass.instance).BigBlueShip.position);
+            BigRedVector = VectorToString(((PlayerClass)PlayerClass.instance).BigRedShip.position);
 
         }
 
