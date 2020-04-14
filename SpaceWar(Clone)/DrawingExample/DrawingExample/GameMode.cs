@@ -23,7 +23,11 @@ namespace DrawingExample
         // #### HUD ####
         HUD hud;
 
-        PlayerClass player;
+        public PlayerClass player1;
+        public PlayerClass player2;
+
+        public Vector2 Player1StartLoc = new Vector2(80, 500);
+        public Vector2 Player2StartLoc = new Vector2(1220, 465);
 
         PlanetObsticleClass sun;
 
@@ -64,7 +68,13 @@ namespace DrawingExample
             // #### HUD ####
             hud = new HUD();
 
-            player = new PlayerClass();
+            player1 = new PlayerClass();
+            player1.SetupPlayer1();
+            player1.Position = Player1StartLoc;
+
+            player2 = new PlayerClass();
+            player2.SetupPlayer2();
+            player2.Position = Player2StartLoc;
 
             sun = new PlanetObsticleClass();
 
@@ -95,81 +105,81 @@ namespace DrawingExample
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void GameUpdate(GameTime gameTime)
         {
-            if (Keyboard.GetState().IsKeyDown(Keys.Space))
-            {
-                SunOn = true;
-            }
             if (Keyboard.GetState().IsKeyDown(Keys.Escape))
             {
                 Exit();
             }
-            //BigRedShip Controls.
-            if (IsKeyHeld(Keys.I) || IsKeyPressed(Keys.I))
+
+            if (Keyboard.GetState().IsKeyDown(Keys.Space))
             {
-                PlayerClass.instance.BigRedShip.position.Y -= 10;
-                PlayerClass.instance.Player2Loc.Y -= 10;
+                SunOn = true;
             }
-            if (IsKeyHeld(Keys.K) || IsKeyPressed(Keys.K))
-            {
-                PlayerClass.instance.BigRedShip.position.Y += 10;
-                PlayerClass.instance.Player2Loc.Y += 10;
-            }
-            if (IsKeyHeld(Keys.J) || IsKeyPressed(Keys.J))
-            {
-                PlayerClass.instance.BigRedShip.position.X -= 10;
-                PlayerClass.instance.Player2Loc.X -= 10;
-            }
-            if (IsKeyHeld(Keys.L) || IsKeyPressed(Keys.L))
-            {
-                PlayerClass.instance.BigRedShip.position.X += 10;
-                PlayerClass.instance.Player2Loc.X += 10;
-            }
-            if (IsKeyHeld(Keys.U) || IsKeyPressed(Keys.U))
-            {
-                PlayerClass.instance.BigRedShip.rotation -= 7 * (MathHelper.Pi / 180);
-            }
-            if (IsKeyHeld(Keys.O) || IsKeyPressed(Keys.O))
-            {
-                PlayerClass.instance.BigRedShip.rotation += 7 * (MathHelper.Pi / 180);
-            }
-            if (IsKeyPressed(Keys.Y))
-            {
-                PlayerClass.instance.TorpedoShot2(gameTime);
-            }
+
 
             //BigBlueShip Controls.
             if (IsKeyHeld(Keys.W) || IsKeyPressed(Keys.W))
             {
-                PlayerClass.instance.BigBlueShip.position.Y -= 10;
-                PlayerClass.instance.Player1Loc.Y -= 10;
+                player1.Position.Y -= 10;
             }
             if (IsKeyHeld(Keys.S) || IsKeyPressed(Keys.S))
             {
-                PlayerClass.instance.BigBlueShip.position.Y += 10;
-                PlayerClass.instance.Player1Loc.Y += 10;
+                player1.Position.Y += 10;
             }
             if (IsKeyHeld(Keys.A) || IsKeyPressed(Keys.A))
             {
-                PlayerClass.instance.BigBlueShip.position.X -= 10;
-                PlayerClass.instance.Player1Loc.X -= 10;
+                player1.Position.X -= 10;
             }
             if (IsKeyHeld(Keys.D) || IsKeyPressed(Keys.D))
             {
-                PlayerClass.instance.BigBlueShip.position.X += 10;
-                PlayerClass.instance.Player1Loc.X += 10;
+                player1.Position.X += 10;
             }
             if (IsKeyHeld(Keys.Q) || IsKeyPressed(Keys.Q))
             {
-                PlayerClass.instance.BigBlueShip.rotation -= 7 * (MathHelper.Pi / 180);
+                player1.Rotation -= 7 * (MathHelper.Pi / 180);
             }
             if (IsKeyHeld(Keys.E) || IsKeyPressed(Keys.E))
             {
-                PlayerClass.instance.BigBlueShip.rotation += 7 * (MathHelper.Pi / 180);
+                player1.Rotation += 7 * (MathHelper.Pi / 180);
             }
             if (IsKeyPressed(Keys.R))
             {
-                PlayerClass.instance.TorpedoShot1(gameTime);
+                //Console.WriteLine("P1 - Shoot");
+                player1.ShootTorpedo();
             }
+
+
+            //BigRedShip Controls.
+            if (IsKeyHeld(Keys.I) || IsKeyPressed(Keys.I))
+            {
+                player2.Position.Y -= 10;
+            }
+            if (IsKeyHeld(Keys.K) || IsKeyPressed(Keys.K))
+            {   
+                player2.Position.Y += 10;
+            }
+            if (IsKeyHeld(Keys.J) || IsKeyPressed(Keys.J))
+            {
+                player2.Position.X -= 10;
+            }
+            if (IsKeyHeld(Keys.L) || IsKeyPressed(Keys.L))
+            {
+                player2.Position.X += 10;
+            }
+            if (IsKeyHeld(Keys.U) || IsKeyPressed(Keys.U))
+            {
+                player2.Rotation -= 7 * (MathHelper.Pi / 180);
+            }
+            if (IsKeyHeld(Keys.O) || IsKeyPressed(Keys.O))
+            {
+                player2.Rotation += 7 * (MathHelper.Pi / 180);
+            }
+            if (IsKeyPressed(Keys.Y))
+            {
+                //Console.WriteLine("P2 - Shoot");
+                player2.ShootTorpedo();
+            }
+
+           
         
             // #### HUD ####
             hud.Update(gameTime); 
@@ -192,7 +202,7 @@ namespace DrawingExample
             {
                 sun.Draw(spriteBatch);
             }
-            player.Draw(spriteBatch);
+           
         }
 
        

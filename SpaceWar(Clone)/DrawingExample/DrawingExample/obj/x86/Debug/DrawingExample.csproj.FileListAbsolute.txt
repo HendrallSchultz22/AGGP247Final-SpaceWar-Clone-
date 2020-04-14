@@ -221,3 +221,4 @@ C:\Users\Lunao\OneDrive\Documents\GitHub\AGGP247Final-SpaceWar-Clone-\SpaceWar(C
 D:\GIT\AGGP247Final-SpaceWar-Clone\SpaceWar(Clone)\DrawingExample\DrawingExample\bin\Windows\x86\Debug\Content\BigBlue.xnb
 D:\GIT\AGGP247Final-SpaceWar-Clone\SpaceWar(Clone)\DrawingExample\DrawingExample\bin\Windows\x86\Debug\Content\torpedo.xnb
 C:\Users\Lunao\OneDrive\Documents\GitHub\AGGP247Final-SpaceWar-Clone-\SpaceWar(Clone)\DrawingExample\DrawingExample\bin\Windows\x86\Debug\Content\Sun.xnb
+D:\GIT\AGGP247Final-SpaceWar-Clone\SpaceWar(Clone)\DrawingExample\DrawingExample\bin\Windows\x86\Debug\Content\Sun.xnb

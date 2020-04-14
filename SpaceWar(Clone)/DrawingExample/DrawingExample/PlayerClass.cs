@@ -12,118 +12,94 @@ namespace DrawingExample
 {
     class PlayerClass : BaseGameObject
     {
-        public static PlayerClass instance;
-        public Sprite BigRedShip;
-        public Sprite BigBlueShip;
-   
-        public Vector2 Player1Loc = new Vector2(80, 500);
-        public Vector2 Player2Loc = new Vector2(1220, 465);
-
-        public PlayerClass()
-        {
-            instance = this;
-        }
-        public void TorpedoShot1(GameTime gameTime)
+        
+        public void ShootTorpedo()
         {
             Torpedo T = new Torpedo();
-            T.Position = BigBlueShip.position;
-            T.Rotation = BigBlueShip.rotation;
-            T.Velocity = LinePrimatives.AngleToV2(MathHelper.ToDegrees(BigBlueShip.rotation), T.MovementSpeed);
+            T.Position = sprite.position;
+            T.Rotation = sprite.rotation;
+            T.Velocity = LinePrimatives.AngleToV2(MathHelper.ToDegrees(sprite.rotation), T.MovementSpeed);
+            T.owner = this; 
         }
 
-        public void TorpedoShot2(GameTime gameTime)
+       
+
+        public virtual void SetupPlayer1()
         {
-            Torpedo T = new Torpedo();
-            T.Position = BigRedShip.position;
-            T.Rotation = BigRedShip.rotation;
-            T.Velocity = LinePrimatives.AngleToV2(MathHelper.ToDegrees(BigRedShip.rotation), T.MovementSpeed);
+            sprite = new Sprite("BigBlue");
+            sprite.scale = .2f;
+            sprite.origin.X = sprite.texture.Width / 2;
+            sprite.origin.Y = sprite.texture.Height / 2;
+
+            Collison = new Rectangle(0, 0, (int)(sprite.texture.Width * sprite.scale), (int)(sprite.texture.Height * sprite.scale));
         }
 
-        public override void InitalizeObject()
+        public virtual void SetupPlayer2()
         {
-           
-            BigRedShip = new Sprite("BigRed");
-            BigRedShip.scale = .2f;
-            BigRedShip.position = Player2Loc;
-            BigRedShip.origin.X = BigRedShip.texture.Width / 2;
-            BigRedShip.origin.Y = BigRedShip.texture.Height / 2;
+            sprite = new Sprite("BigRed");
+            sprite.scale = .2f;
+            sprite.origin.X = sprite.texture.Width / 2;
+            sprite.origin.Y = sprite.texture.Height / 2;
 
-            RectCollison = new Rectangle(0, 0, BigRedShip.texture.Width, BigRedShip.texture.Height);
-
-            BigBlueShip = new Sprite("BigBlue");
-            BigBlueShip.scale = .2f;
-            BigBlueShip.position = Player1Loc;
-            BigBlueShip.origin.X = BigBlueShip.texture.Width / 2;
-            BigBlueShip.origin.Y = BigBlueShip.texture.Height / 2;
-
-            RectCollison = new Rectangle(0, 0, BigBlueShip.texture.Width, BigBlueShip.texture.Height);
+            Collison = new Rectangle(0, 0, (int)(sprite.texture.Width * sprite.scale), (int)(sprite.texture.Height * sprite.scale));
         }
+       
 
         public override void Update(GameTime gameTime)
         {
-            RectCollison.Location = Player1Loc.ToPoint();
-            RectCollison.Location = Player2Loc.ToPoint();
 
-            foreach (BaseGameObject go in GameApp.instance.InGameList)
-            {
-                if (RectCollison.Contains(go.RectCollison))
-                {
-                    Destroy(); 
-                }
-            }
+          
+            
+
             //player1
-            if (BigBlueShip.position.X > ScreenSize.X)
+            if (sprite.position.X > ScreenSize.X)
             {
-                BigBlueShip.position.X = AntiScreenSize.X;
-                Player1Loc.X = AntiScreenSize.X;
+                sprite.position.X = AntiScreenSize.X;
+                Position.X = AntiScreenSize.X;
             }
-            if (BigBlueShip.position.X < AntiScreenSize.X)
+            if (sprite.position.X < AntiScreenSize.X)
             {
-                BigBlueShip.position.X = ScreenSize.X;
-                Player1Loc.X = ScreenSize.X;
+                sprite.position.X = ScreenSize.X;
+                Position.X = ScreenSize.X;
             }
-            if (BigBlueShip.position.Y > ScreenSize.Y)
+            if (sprite.position.Y > ScreenSize.Y)
             {
-                BigBlueShip.position.Y = AntiScreenSize.Y;
-                Player1Loc.Y = AntiScreenSize.Y;
+                sprite.position.Y = AntiScreenSize.Y;
+                Position.Y = AntiScreenSize.Y;
             }
-            if (BigBlueShip.position.Y < AntiScreenSize.Y)
+            if (sprite.position.Y < AntiScreenSize.Y)
             {
-                BigBlueShip.position.Y = ScreenSize.Y;
-                Player1Loc.Y = ScreenSize.Y;
+                sprite.position.Y = ScreenSize.Y;
+                Position.Y = ScreenSize.Y;
             }
 
-            //Player2
-            if (BigRedShip.position.X > ScreenSize.X)
-            {
-                BigRedShip.position.X = AntiScreenSize.X;
-                Player2Loc.X = AntiScreenSize.X;
-            }
-            if (BigRedShip.position.X < AntiScreenSize.X)
-            {
-                BigRedShip.position.X = ScreenSize.X;
-                Player2Loc.X = ScreenSize.X;
-            }
-            if (BigRedShip.position.Y > ScreenSize.Y)
-            {
-                BigRedShip.position.Y = AntiScreenSize.Y;
-                Player2Loc.Y = AntiScreenSize.Y;
-            }
-            if (BigRedShip.position.Y < AntiScreenSize.Y)
-            {
-                BigRedShip.position.Y = ScreenSize.Y;
-                Player2Loc.Y = ScreenSize.Y;
-            }
+            // Updating Rectangle here... 
+            // Got Moved down to BaseGameObject
+            //Collison.Location = Position.ToPoint();
+
+            /*
+           foreach (BaseGameObject go in GameApp.instance.InGameList)
+           {
+               if (RectCollison.Contains(go.RectCollison))
+               {
+                   Destroy(); 
+               }
+           }
+           */
+
 
 
         }
 
+        /*
         public override void Draw(SpriteBatch spriteBatch)
         {
-            BigBlueShip.position = Player1Loc;
-            BigBlueShip.Draw(spriteBatch);
-            BigRedShip.position = Player2Loc;
-            BigRedShip.Draw(spriteBatch);
+            sprite.position = Position;
+            sprite.rotation = Rotation; 
+            sprite.Draw(spriteBatch);
+
+           
         }
+        */
     }
 }

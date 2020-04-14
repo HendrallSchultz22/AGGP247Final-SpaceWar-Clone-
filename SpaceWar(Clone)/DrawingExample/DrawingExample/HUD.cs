@@ -37,9 +37,8 @@ namespace DrawingExample
         public void Update(GameTime gameTime)
         {
 
-            BigBlueVector = VectorToString(((PlayerClass)PlayerClass.instance).BigBlueShip.position);
-            BigRedVector = VectorToString(((PlayerClass)PlayerClass.instance).BigRedShip.position);
-
+            BigBlueVector = VectorToString(((GameMode)GameMode.instance).player1.Position);
+            BigRedVector  = VectorToString(((GameMode)GameMode.instance).player2.Position);
         }
 
         public void Draw(SpriteBatch spriteBatch)

@@ -6,11 +6,13 @@ using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using LineDraw;
 
 namespace DrawingExample
 {
     public class BaseGameObject
     {
+        public Sprite sprite;
         public Vector2 ScreenSize = new Vector2(1280, 960);
         public Vector2 AntiScreenSize = new Vector2(0, 0);
         public bool isActive = true;
@@ -20,10 +22,10 @@ namespace DrawingExample
         public Vector2 Velocity;
         public bool HasMaxiumVelocity = false;
         public float MaxiumVelocity = float.MaxValue;
-        public Rectangle RectCollison;
+        public Rectangle Collison;
         public BaseGameObject owner;
-        public BaseGameObject player1;
-        public BaseGameObject player2;
+        
+   
 
         public BaseGameObject()
         {
@@ -41,8 +43,6 @@ namespace DrawingExample
         {
             if (isActive)
             {
-
-                Update(gameTime);
                 if (HasMaxiumVelocity)
                 {
                     ScrubVelocity();
@@ -50,6 +50,13 @@ namespace DrawingExample
 
                 float gT = (float)gameTime.ElapsedGameTime.TotalSeconds;
                 Position += Velocity * gT;
+
+                if (sprite != null)
+                { 
+                    Collison.Location = (Position - sprite.origin*sprite.scale).ToPoint();
+                }
+
+                Update(gameTime);
             }
         }
 
@@ -78,8 +85,19 @@ namespace DrawingExample
 
         public virtual void Draw(SpriteBatch spriteBatch)
         {
+            if (sprite != null)
+            { 
+            sprite.position = Position;
+            sprite.rotation = Rotation;
+            sprite.Draw(spriteBatch);
+            }
 
+            // Debug
+            if (Collison != null)
+            { 
 
+                LinePrimatives.DrawRectangle(spriteBatch, 5, Color.Red, Collison);
+            }
         }
 
         public void Destroy()

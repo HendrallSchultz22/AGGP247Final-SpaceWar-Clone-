@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <SourceFile>C:/Users/Lunao/OneDrive/Documents/GitHub/AGGP247Final-SpaceWar-Clone-/SpaceWar(Clone)/DrawingExample/DrawingExample/Content/Sun.png</SourceFile>
-  <SourceTime>2020-04-13T16:08:19.161426-04:00</SourceTime>
-  <DestFile>C:/Users/Lunao/OneDrive/Documents/GitHub/AGGP247Final-SpaceWar-Clone-/SpaceWar(Clone)/DrawingExample/DrawingExample/Content/bin/Windows/Content/Sun.xnb</DestFile>
-  <DestTime>2020-04-13T16:25:22.0156224-04:00</DestTime>
+  <SourceFile>D:/GIT/AGGP247Final-SpaceWar-Clone/SpaceWar(Clone)/DrawingExample/DrawingExample/Content/Sun.png</SourceFile>
+  <SourceTime>2020-04-14T16:37:19.5803574-04:00</SourceTime>
+  <DestFile>D:/GIT/AGGP247Final-SpaceWar-Clone/SpaceWar(Clone)/DrawingExample/DrawingExample/Content/bin/Windows/Content/Sun.xnb</DestFile>
+  <DestTime>2020-04-14T16:46:26.8863725-04:00</DestTime>
   <Importer>TextureImporter</Importer>
-  <ImporterTime>2018-12-08T11:35:54-05:00</ImporterTime>
+  <ImporterTime>2018-09-23T17:55:52-04:00</ImporterTime>
   <Processor>TextureProcessor</Processor>
-  <ProcessorTime>2018-12-08T11:35:54-05:00</ProcessorTime>
+  <ProcessorTime>2018-09-23T17:55:52-04:00</ProcessorTime>
   <Parameters>
     <Key>ColorKeyColor</Key>
     <Value>255,0,255,255</Value>

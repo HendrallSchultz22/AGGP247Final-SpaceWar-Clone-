@@ -27,7 +27,7 @@ namespace DrawingExample
             SunSprite.origin.X = SunSprite.texture.Width / 2;
             SunSprite.origin.Y = SunSprite.texture.Height / 2;
 
-            RectCollison = new Rectangle(0, 0, SunSprite.texture.Width, SunSprite.texture.Height);
+            Collison = new Rectangle(0, 0, SunSprite.texture.Width, SunSprite.texture.Height);
 
             SunPos = new Vector2(ScreenSize.X / 2, ScreenSize.Y / 2);
 
@@ -35,17 +35,17 @@ namespace DrawingExample
 
         public override void Update(GameTime gameTime)
         {
-            RectCollison.Location = SunPos.ToPoint();
+            Collison.Location = SunPos.ToPoint();
            
 
 
 
         }
 
-        public override void Draw(SpriteBatch spriteBatch)
+       /* public override void Draw(SpriteBatch spriteBatch)
         {
             SunSprite.position = SunPos;
             SunSprite.Draw(spriteBatch);
-        }
+        }*/
     }
 }
