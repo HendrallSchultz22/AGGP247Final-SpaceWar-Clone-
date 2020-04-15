@@ -13,7 +13,8 @@ namespace DrawingExample
     class PlanetObsticleClass : BaseGameObject
     {
         public Vector2 SunPos;
-    
+
+        public Vector2 Direction;
         public PlanetObsticleClass()
         {
             
@@ -38,10 +39,6 @@ namespace DrawingExample
         {
             foreach (BaseGameObject go in GameApp.instance.InGameList)
             {
-               
-
-                ///Console.WriteLine("*****"); 
-
                 if (Collison.Intersects(go.Collison))
                 {
                     go.TakeDamage(1f);
@@ -50,17 +47,15 @@ namespace DrawingExample
 
             foreach (BaseGameObject go in GameApp.instance.InGameList)
             {
-                if(go.Position.X >= this.Position.X)
+                if (go.Equals(this))
                 {
-                    if (go.Equals(owner)||go.Equals(this))
-                    {
-                        go.owner.Velocity.X = 0;
-                    }
-                    else
-                    {
-                        go.Velocity += Gravity;
-                    }
-                    
+                    continue;
+                }
+                Direction = this.Position - go.Position;
+                
+                if (Direction.Length() >= go.Position.Length())
+                {
+                    go.Velocity += Gravity * Direction;
                 }
 
             }

@@ -26,7 +26,7 @@ namespace DrawingExample
         public BaseGameObject owner;
         public bool IgnoresDamage = false;
         public float Health = 1f;
-        public Vector2 Gravity = new Vector2(.5f,.5f);
+        public Vector2 Gravity = new Vector2(.0005f,.0005f);
 
         public BaseGameObject()
         {

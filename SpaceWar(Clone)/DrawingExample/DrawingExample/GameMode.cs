@@ -32,7 +32,7 @@ namespace DrawingExample
         
 
         public Sprite Starfield;
-        public bool SunOn = false;
+        public bool SunOn = true;
         /// <summary>
         /// Public contstructor... Does need to do anything at all. Those are the best constructors. 
         /// </summary>
@@ -111,13 +111,14 @@ namespace DrawingExample
                 Exit();
             }
 
-            if (Keyboard.GetState().IsKeyDown(Keys.Space))
+            if (IsKeyReleased(Keys.Space))
             {
-                SunOn = true;
+                
                 if(SunOn == true)
                 {
-                    player1.PlaceSun();
                     SunOn = false;
+                    player1.PlaceSun();
+                    
                 }
                       
             }

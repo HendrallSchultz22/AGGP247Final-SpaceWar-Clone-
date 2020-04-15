@@ -25,7 +25,6 @@ namespace DrawingExample
         {
             PlanetObsticleClass p = new PlanetObsticleClass();
             p.Position = p.SunPos;
-            p.owner = this;
             p.IgnoresDamage = true;
         }
         public virtual void SetupPlayer1()
