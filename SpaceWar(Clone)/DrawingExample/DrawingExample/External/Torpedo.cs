@@ -17,7 +17,7 @@ namespace DrawingExample
         
         public override void InitalizeObject()
         {
-            sprite = new Sprite("torpedo");
+            sprite = new Sprite("Torp");
             sprite.scale = .15f;
             sprite.origin.X = sprite.texture.Width / 2;
             sprite.origin.Y = sprite.texture.Height / 2;
@@ -36,7 +36,7 @@ namespace DrawingExample
             // check against everythign in the scene list instead. 
             foreach (BaseGameObject go in GameApp.instance.InGameList)
             {
-                if ( go.Equals(owner) || go.Equals(this) )
+                if (go.Equals(owner) || go.Equals(this) )
                 {
                     continue; 
                 }
@@ -45,28 +45,14 @@ namespace DrawingExample
                         
                 if (Collison.Intersects(go.Collison))
                 {
-                        Destroy();
-                   
-                }
+                    TakeDamage(1f);
+                    go.TakeDamage(1f);
+                }      
             }
         
 
             
         }
-
-        /*
-        public override void Draw(SpriteBatch spriteBatch)
-        {
-            sprite.position = Position;
-            sprite.rotation = Rotation;
-            sprite.Draw(spriteBatch);
-
-            // Debug
-            LinePrimatives.DrawRectangle(spriteBatch, 5, Color.Red, Collison);
-
-        }
-        */
-
 
     }
 }

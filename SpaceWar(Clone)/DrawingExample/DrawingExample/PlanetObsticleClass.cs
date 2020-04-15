@@ -12,40 +12,61 @@ namespace DrawingExample
 {
     class PlanetObsticleClass : BaseGameObject
     {
-        private Sprite SunSprite;
-
         public Vector2 SunPos;
     
         public PlanetObsticleClass()
         {
             
         }
+        
         public override void InitalizeObject()
         {
-            SunSprite = new Sprite("Sun");
-            SunSprite.scale = .25f;
-            SunSprite.origin.X = SunSprite.texture.Width / 2;
-            SunSprite.origin.Y = SunSprite.texture.Height / 2;
-
-            Collison = new Rectangle(0, 0, SunSprite.texture.Width, SunSprite.texture.Height);
+            sprite = new Sprite("Sun");
+            sprite.scale = .2f;
+            sprite.origin.X = sprite.texture.Width / 2;
+            sprite.origin.Y = sprite.texture.Height / 2;
 
             SunPos = new Vector2(ScreenSize.X / 2, ScreenSize.Y / 2);
+
+            Collison = new Rectangle(0, 0, (int)(sprite.texture.Width  * sprite.scale), (int)(sprite.texture.Height * sprite.scale));
+
+           
 
         }
 
         public override void Update(GameTime gameTime)
         {
-            Collison.Location = SunPos.ToPoint();
-           
+            foreach (BaseGameObject go in GameApp.instance.InGameList)
+            {
+               
 
+                ///Console.WriteLine("*****"); 
 
+                if (Collison.Intersects(go.Collison))
+                {
+                    go.TakeDamage(1f);
+                }
+            }
+
+            foreach (BaseGameObject go in GameApp.instance.InGameList)
+            {
+                if(go.Position.X >= this.Position.X)
+                {
+                    if (go.Equals(owner)||go.Equals(this))
+                    {
+                        go.owner.Velocity.X = 0;
+                    }
+                    else
+                    {
+                        go.Velocity += Gravity;
+                    }
+                    
+                }
+
+            }
 
         }
-
-       /* public override void Draw(SpriteBatch spriteBatch)
-        {
-            SunSprite.position = SunPos;
-            SunSprite.Draw(spriteBatch);
-        }*/
+       
+        
     }
 }

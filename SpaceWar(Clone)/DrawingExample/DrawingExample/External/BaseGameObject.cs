@@ -24,8 +24,9 @@ namespace DrawingExample
         public float MaxiumVelocity = float.MaxValue;
         public Rectangle Collison;
         public BaseGameObject owner;
-        
-   
+        public bool IgnoresDamage = false;
+        public float Health = 1f;
+        public Vector2 Gravity = new Vector2(.5f,.5f);
 
         public BaseGameObject()
         {
@@ -59,7 +60,27 @@ namespace DrawingExample
                 Update(gameTime);
             }
         }
+        public virtual bool TakeDamage(float Value)
+        {
 
+            if (IgnoresDamage)
+            {
+                return false;
+            }
+
+            return ProcessDamage(Value);
+
+        }
+        protected bool ProcessDamage(float Value)
+        {
+            Health -= Value;
+            if (Health <= 0)
+            {
+
+                Destroy();
+            }
+            return true;
+        }
         public void ScrubVelocity()
         {
             if (Velocity.Length() > MaxiumVelocity)

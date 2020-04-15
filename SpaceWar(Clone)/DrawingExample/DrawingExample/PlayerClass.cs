@@ -12,25 +12,29 @@ namespace DrawingExample
 {
     class PlayerClass : BaseGameObject
     {
-        
-        public void ShootTorpedo()
+       
+        public void ShootTorpedo(float rotation)
         {
             Torpedo T = new Torpedo();
             T.Position = sprite.position;
-            T.Rotation = sprite.rotation;
-            T.Velocity = LinePrimatives.AngleToV2(MathHelper.ToDegrees(sprite.rotation), T.MovementSpeed);
+            T.Rotation = rotation;
+            T.Velocity = LinePrimatives.AngleToV2(MathHelper.ToDegrees(rotation), T.MovementSpeed);
             T.owner = this; 
         }
-
-       
-
+        public void PlaceSun()
+        {
+            PlanetObsticleClass p = new PlanetObsticleClass();
+            p.Position = p.SunPos;
+            p.owner = this;
+            p.IgnoresDamage = true;
+        }
         public virtual void SetupPlayer1()
         {
             sprite = new Sprite("BigBlue");
             sprite.scale = .2f;
             sprite.origin.X = sprite.texture.Width / 2;
             sprite.origin.Y = sprite.texture.Height / 2;
-
+            
             Collison = new Rectangle(0, 0, (int)(sprite.texture.Width * sprite.scale), (int)(sprite.texture.Height * sprite.scale));
         }
 
@@ -40,7 +44,7 @@ namespace DrawingExample
             sprite.scale = .2f;
             sprite.origin.X = sprite.texture.Width / 2;
             sprite.origin.Y = sprite.texture.Height / 2;
-
+            
             Collison = new Rectangle(0, 0, (int)(sprite.texture.Width * sprite.scale), (int)(sprite.texture.Height * sprite.scale));
         }
        
@@ -48,10 +52,6 @@ namespace DrawingExample
         public override void Update(GameTime gameTime)
         {
 
-          
-            
-
-            //player1
             if (sprite.position.X > ScreenSize.X)
             {
                 sprite.position.X = AntiScreenSize.X;
@@ -75,31 +75,24 @@ namespace DrawingExample
 
             // Updating Rectangle here... 
             // Got Moved down to BaseGameObject
-            //Collison.Location = Position.ToPoint();
+            foreach (BaseGameObject go in GameApp.instance.InGameList)
+            {
+                if (go.Equals(owner) || go.Equals(this))
+                {
+                    continue;
+                }
 
-            /*
-           foreach (BaseGameObject go in GameApp.instance.InGameList)
-           {
-               if (RectCollison.Contains(go.RectCollison))
-               {
-                   Destroy(); 
-               }
-           }
-           */
+                ///Console.WriteLine("*****"); 
 
-
+                if (Collison.Intersects(go.Collison))
+                {
+                    go.TakeDamage(1f);
+                    TakeDamage(1f);
+                }
+            }
 
         }
 
-        /*
-        public override void Draw(SpriteBatch spriteBatch)
-        {
-            sprite.position = Position;
-            sprite.rotation = Rotation; 
-            sprite.Draw(spriteBatch);
-
-           
-        }
-        */
+       
     }
 }

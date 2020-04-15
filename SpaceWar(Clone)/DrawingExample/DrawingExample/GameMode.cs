@@ -29,7 +29,7 @@ namespace DrawingExample
         public Vector2 Player1StartLoc = new Vector2(80, 500);
         public Vector2 Player2StartLoc = new Vector2(1220, 465);
 
-        PlanetObsticleClass sun;
+        
 
         public Sprite Starfield;
         public bool SunOn = false;
@@ -76,7 +76,8 @@ namespace DrawingExample
             player2.SetupPlayer2();
             player2.Position = Player2StartLoc;
 
-            sun = new PlanetObsticleClass();
+
+            
 
 
             Starfield = new Sprite("Space");
@@ -113,6 +114,12 @@ namespace DrawingExample
             if (Keyboard.GetState().IsKeyDown(Keys.Space))
             {
                 SunOn = true;
+                if(SunOn == true)
+                {
+                    player1.PlaceSun();
+                    SunOn = false;
+                }
+                      
             }
 
 
@@ -144,7 +151,7 @@ namespace DrawingExample
             if (IsKeyPressed(Keys.R))
             {
                 //Console.WriteLine("P1 - Shoot");
-                player1.ShootTorpedo();
+                player1.ShootTorpedo(0);
             }
 
 
@@ -176,7 +183,7 @@ namespace DrawingExample
             if (IsKeyPressed(Keys.Y))
             {
                 //Console.WriteLine("P2 - Shoot");
-                player2.ShootTorpedo();
+                player2.ShootTorpedo(15.7f);
             }
 
            
@@ -198,10 +205,7 @@ namespace DrawingExample
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void GameDraw(GameTime gameTime)
         {
-            if(SunOn == true)
-            {
-                sun.Draw(spriteBatch);
-            }
+           
            
         }
 
