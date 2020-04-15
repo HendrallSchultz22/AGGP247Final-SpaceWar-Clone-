@@ -71,14 +71,9 @@ namespace DrawingExample
             return ProcessDamage(Value);
 
         }
-        protected bool ProcessDamage(float Value)
+        protected virtual bool ProcessDamage(float Value)
         {
-            Health -= Value;
-            if (Health <= 0)
-            {
-
-                Destroy();
-            }
+          
             return true;
         }
         public void ScrubVelocity()

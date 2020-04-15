@@ -45,7 +45,7 @@ namespace DrawingExample
                         
                 if (Collison.Intersects(go.Collison))
                 {
-                    TakeDamage(1f);
+                    Destroy();
                     go.TakeDamage(1f);
                 }      
             }

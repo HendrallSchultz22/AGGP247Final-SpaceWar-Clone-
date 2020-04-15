@@ -223,3 +223,4 @@ C:\Users\Lunao\OneDrive\Documents\GitHub\AGGP247Final-SpaceWar-Clone-\SpaceWar(C
 C:\Users\Lunao\OneDrive\Documents\GitHub\AGGP247Final-SpaceWar-Clone-\SpaceWar(Clone)\DrawingExample\DrawingExample\obj\x86\Debug\DrawingExample.exe
 C:\Users\Lunao\OneDrive\Documents\GitHub\AGGP247Final-SpaceWar-Clone-\SpaceWar(Clone)\DrawingExample\DrawingExample\obj\x86\Debug\DrawingExample.pdb
 C:\Users\Lunao\OneDrive\Documents\GitHub\AGGP247Final-SpaceWar-Clone-\SpaceWar(Clone)\DrawingExample\DrawingExample\obj\x86\Debug\DrawingExample.csprojAssemblyReference.cache
+D:\GIT\AGGP247Final-SpaceWar-Clone\SpaceWar(Clone)\DrawingExample\DrawingExample\bin\Windows\x86\Debug\Content\Torp.xnb

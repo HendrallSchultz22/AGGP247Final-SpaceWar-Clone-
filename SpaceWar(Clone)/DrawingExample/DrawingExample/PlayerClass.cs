@@ -17,8 +17,8 @@ namespace DrawingExample
         {
             Torpedo T = new Torpedo();
             T.Position = sprite.position;
-            T.Rotation = rotation;
-            T.Velocity = LinePrimatives.AngleToV2(MathHelper.ToDegrees(rotation), T.MovementSpeed);
+            T.Rotation = sprite.rotation;
+            T.Velocity = LinePrimatives.AngleToV2(MathHelper.ToDegrees(sprite.rotation), T.MovementSpeed);
             T.owner = this; 
         }
         public void PlaceSun()
@@ -73,26 +73,20 @@ namespace DrawingExample
                 Position.Y = ScreenSize.Y;
             }
 
-            // Updating Rectangle here... 
-            // Got Moved down to BaseGameObject
-            foreach (BaseGameObject go in GameApp.instance.InGameList)
-            {
-                if (go.Equals(owner) || go.Equals(this))
-                {
-                    continue;
-                }
-
-                ///Console.WriteLine("*****"); 
-
-                if (Collison.Intersects(go.Collison))
-                {
-                    go.TakeDamage(1f);
-                    TakeDamage(1f);
-                }
-            }
+            
+            
 
         }
 
-       
+        protected override bool ProcessDamage(float Value)
+        {
+            Health -= Value;
+            if (Health <= 0)
+            {
+
+                Destroy();
+            }
+            return true;
+        }
     }
 }
