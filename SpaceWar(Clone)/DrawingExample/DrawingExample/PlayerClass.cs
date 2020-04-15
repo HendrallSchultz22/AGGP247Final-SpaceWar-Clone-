@@ -33,7 +33,8 @@ namespace DrawingExample
             sprite.scale = .2f;
             sprite.origin.X = sprite.texture.Width / 2;
             sprite.origin.Y = sprite.texture.Height / 2;
-            
+            sprite.rotation = Rotation; 
+
             Collison = new Rectangle(0, 0, (int)(sprite.texture.Width * sprite.scale), (int)(sprite.texture.Height * sprite.scale));
         }
 
@@ -43,7 +44,8 @@ namespace DrawingExample
             sprite.scale = .2f;
             sprite.origin.X = sprite.texture.Width / 2;
             sprite.origin.Y = sprite.texture.Height / 2;
-            
+            sprite.rotation = Rotation;
+
             Collison = new Rectangle(0, 0, (int)(sprite.texture.Width * sprite.scale), (int)(sprite.texture.Height * sprite.scale));
         }
        

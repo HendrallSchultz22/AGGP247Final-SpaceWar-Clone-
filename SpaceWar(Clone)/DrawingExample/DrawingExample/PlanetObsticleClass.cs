@@ -12,13 +12,10 @@ namespace DrawingExample
 {
     class PlanetObsticleClass : BaseGameObject
     {
+        public float Gravity = .5f;
+
         public Vector2 SunPos;
 
-        public Vector2 Direction;
-        public PlanetObsticleClass()
-        {
-            
-        }
         
         public override void InitalizeObject()
         {
@@ -37,26 +34,24 @@ namespace DrawingExample
 
         public override void Update(GameTime gameTime)
         {
-            foreach (BaseGameObject go in GameApp.instance.InGameList)
-            {
-                if (Collison.Intersects(go.Collison))
-                {
-                    go.TakeDamage(1f);
-                }
-            }
-
+            
             foreach (BaseGameObject go in GameApp.instance.InGameList)
             {
                 if (go.Equals(this))
                 {
                     continue;
                 }
-                Direction = this.Position - go.Position;
+
+                Vector2 Direction = this.Position - go.Position;
+                float Length = Direction.Length(); 
+                Direction.Normalize();
                 
-                if (Direction.Length() >= go.Position.Length())
+                if (Length >= go.Position.Length())
                 {
-                    go.Velocity += Gravity * Direction;
+                   
                 }
+
+                go.Velocity += Gravity * Direction;
 
             }
 

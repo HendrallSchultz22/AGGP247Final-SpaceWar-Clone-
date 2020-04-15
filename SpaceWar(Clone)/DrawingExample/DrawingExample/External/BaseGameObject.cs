@@ -26,7 +26,7 @@ namespace DrawingExample
         public BaseGameObject owner;
         public bool IgnoresDamage = false;
         public float Health = 1f;
-        public Vector2 Gravity = new Vector2(.0005f,.0005f);
+        
 
         public BaseGameObject()
         {
@@ -116,9 +116,12 @@ namespace DrawingExample
             }
         }
 
-        public void Destroy()
+        public void Destroy(bool CallOnDestroy = true)
         {
-            OnDestroy();
+            if (CallOnDestroy)
+            { 
+                OnDestroy();
+            }
             GameApp.instance.DestroyObjectList.Add(this);
         }
 

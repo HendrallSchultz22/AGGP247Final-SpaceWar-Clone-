@@ -182,6 +182,13 @@ namespace DrawingExample
         {
         }
 
+        public void ClearScene()
+        {
+            foreach (BaseGameObject Obj in InGameList)
+            {
+                Obj.Destroy(false); 
+            }
+        }
 
         //Utility Functions 
 

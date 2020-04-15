@@ -69,10 +69,12 @@ namespace DrawingExample
             hud = new HUD();
 
             player1 = new PlayerClass();
+            player1.Rotation = 0;
             player1.SetupPlayer1();
             player1.Position = Player1StartLoc;
 
             player2 = new PlayerClass();
+            player2.Rotation = 180; 
             player2.SetupPlayer2();
             player2.Position = Player2StartLoc;
 
