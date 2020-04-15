@@ -61,12 +61,24 @@ namespace DrawingExample
         /// </summary>
         protected override void LoadContent()
         {
-
             // TODO: use this.Content to load your game content here
             New = Content.Load<SpriteFont>("THEFONT");
 
             // #### HUD ####
             hud = new HUD();
+
+            Starfield = new Sprite("Space");
+            Starfield.scale = 2f;
+            Starfield.position = new Vector2(1640, 1480);
+            Starfield.origin.X = Starfield.texture.Width;
+            Starfield.origin.Y = Starfield.texture.Height;
+
+            SetupScene(); 
+        }
+
+        void SetupScene()
+        {
+            ClearScene(); 
 
             player1 = new PlayerClass();
             player1.Rotation = 0;
@@ -74,21 +86,10 @@ namespace DrawingExample
             player1.Position = Player1StartLoc;
 
             player2 = new PlayerClass();
-            player2.Rotation = 180; 
+            player2.Rotation = 180;
             player2.SetupPlayer2();
             player2.Position = Player2StartLoc;
-
-
-            
-
-
-            Starfield = new Sprite("Space");
-            Starfield.scale = 2f;
-            Starfield.position = new Vector2(1640, 1480);
-            Starfield.origin.X = Starfield.texture.Width;
-            Starfield.origin.Y = Starfield.texture.Height;
         }
-
        
        
         /// <summary>
