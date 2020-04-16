@@ -29,7 +29,8 @@ namespace DrawingExample
         public Vector2 Player1StartLoc = new Vector2(80, 500);
         public Vector2 Player2StartLoc = new Vector2(1220, 465);
 
-        
+        bool ThrustersActive1 = true;
+        bool ThrustersActive2 = true;
 
         public Sprite Starfield;
         public bool SunOn = true;
@@ -74,6 +75,7 @@ namespace DrawingExample
             Starfield.origin.Y = Starfield.texture.Height;
 
             SetupScene(); 
+            
         }
 
         void SetupScene()
@@ -86,7 +88,7 @@ namespace DrawingExample
             player1.Position = Player1StartLoc;
 
             player2 = new PlayerClass();
-            player2.Rotation = 180;
+            player2.Rotation = 3.14f;
             player2.SetupPlayer2();
             player2.Position = Player2StartLoc;
         }
@@ -126,72 +128,87 @@ namespace DrawingExample
                       
             }
 
-
+            
             //BigBlueShip Controls.
-            if (IsKeyHeld(Keys.W) || IsKeyPressed(Keys.W))
+            if (IsKeyPressed(Keys.W))
             {
-                player1.Position.Y -= 10;
+                if (ThrustersActive1)
+                {
+                    var direction = new Vector2((float)Math.Cos(player1.Rotation), (float)Math.Sin(player1.Rotation));
+                    player1.Velocity += direction * player1.Force;
+                    ThrustersActive1 = false;
+                    if (ThrustersActive1 == false)
+                    {
+                        float currentTime = 0f;
+                        currentTime += (float)gameTime.ElapsedGameTime.TotalSeconds;
+                        if (currentTime > 5)
+                        {
+                            ThrustersActive1 = true;
+                            currentTime = 0;
+                        }
+                       
+                    }
+                }
             }
-            if (IsKeyHeld(Keys.S) || IsKeyPressed(Keys.S))
+            if (IsKeyPressed(Keys.Q))
             {
-                player1.Position.Y += 10;
+                player1.Rotation -= 15 * (MathHelper.Pi / 180);
             }
-            if (IsKeyHeld(Keys.A) || IsKeyPressed(Keys.A))
+            if (IsKeyPressed(Keys.E))
             {
-                player1.Position.X -= 10;
-            }
-            if (IsKeyHeld(Keys.D) || IsKeyPressed(Keys.D))
-            {
-                player1.Position.X += 10;
-            }
-            if (IsKeyHeld(Keys.Q) || IsKeyPressed(Keys.Q))
-            {
-                player1.Rotation -= 7 * (MathHelper.Pi / 180);
-            }
-            if (IsKeyHeld(Keys.E) || IsKeyPressed(Keys.E))
-            {
-                player1.Rotation += 7 * (MathHelper.Pi / 180);
+                player1.Rotation += 15 * (MathHelper.Pi / 180);
             }
             if (IsKeyPressed(Keys.R))
             {
                 //Console.WriteLine("P1 - Shoot");
-                player1.ShootTorpedo(0);
+                player1.ShootTorpedo();
             }
 
 
             //BigRedShip Controls.
-            if (IsKeyHeld(Keys.I) || IsKeyPressed(Keys.I))
+            if (IsKeyPressed(Keys.I))
             {
-                player2.Position.Y -= 10;
+                if (ThrustersActive2)
+                {
+                    var direction = new Vector2((float)Math.Cos(player2.Rotation), (float)Math.Sin(player2.Rotation));
+                    player2.Velocity += direction * player2.Force;
+                    ThrustersActive2 = false;
+                    if(ThrustersActive2 == false)
+                    {
+                        int count = 0;
+                        float currentTime = 0f;
+                        float duration = 0f;
+                        currentTime += (float)gameTime.ElapsedGameTime.TotalSeconds;
+                        if(currentTime >= duration)
+                        {
+                            count++;
+                        }
+                        if(count >= 5)
+                        {
+                            ThrustersActive2 = true;
+                            count = 0;
+                            
+                        }
+                    }
+                }
+                
             }
-            if (IsKeyHeld(Keys.K) || IsKeyPressed(Keys.K))
-            {   
-                player2.Position.Y += 10;
-            }
-            if (IsKeyHeld(Keys.J) || IsKeyPressed(Keys.J))
-            {
-                player2.Position.X -= 10;
-            }
-            if (IsKeyHeld(Keys.L) || IsKeyPressed(Keys.L))
-            {
-                player2.Position.X += 10;
-            }
-            if (IsKeyHeld(Keys.U) || IsKeyPressed(Keys.U))
+            if (IsKeyPressed(Keys.U))
             {
                 player2.Rotation -= 7 * (MathHelper.Pi / 180);
             }
-            if (IsKeyHeld(Keys.O) || IsKeyPressed(Keys.O))
+            if (IsKeyPressed(Keys.O))
             {
                 player2.Rotation += 7 * (MathHelper.Pi / 180);
             }
             if (IsKeyPressed(Keys.Y))
             {
                 //Console.WriteLine("P2 - Shoot");
-                player2.ShootTorpedo(15.7f);
+                player2.ShootTorpedo();
             }
+            
 
-           
-        
+
             // #### HUD ####
             hud.Update(gameTime); 
              
@@ -222,6 +239,22 @@ namespace DrawingExample
             // #### HUD ####
             // Your original code has been replaced with a call to the HUD Class... 
             hud.Draw(spriteBatch);
+            if(player1.isActive == false && player2.isActive == true)
+            {
+                spriteBatch.DrawString(New, "Player 2 is the Winner! " ,
+                new Vector2(550, 400), Color.Azure);
+                
+            }
+            if (player2.isActive == false && player1.isActive == true)
+            {
+                spriteBatch.DrawString(New, "Player 1 is the Winner! ",
+                new Vector2(550, 400), Color.Azure);
+            }
+            if(player1.isActive == false && player2.isActive == false)
+            {
+                spriteBatch.DrawString(New, "Its a Tie!! ",
+                new Vector2(550, 400), Color.Azure);
+            }
 
         }
     }

@@ -48,7 +48,7 @@ namespace DrawingExample
                 
                 if (Length >= go.Position.Length())
                 {
-                   
+                    Gravity %= 50;
                 }
 
                 go.Velocity += Gravity * Direction;

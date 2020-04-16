@@ -21,6 +21,7 @@ namespace DrawingExample
 
         public void Initalize()
         {
+            
             drawFont = GameMode.instance.Content.Load<SpriteFont>("THEFONT");
         }
 

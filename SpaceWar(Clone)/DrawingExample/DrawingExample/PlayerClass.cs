@@ -12,8 +12,8 @@ namespace DrawingExample
 {
     class PlayerClass : BaseGameObject
     {
-       
-        public void ShootTorpedo(float rotation)
+        public float Force = 60;
+        public void ShootTorpedo()
         {
             Torpedo T = new Torpedo();
             T.Position = sprite.position;
@@ -84,7 +84,6 @@ namespace DrawingExample
             Health -= Value;
             if (Health <= 0)
             {
-
                 Destroy();
             }
             return true;

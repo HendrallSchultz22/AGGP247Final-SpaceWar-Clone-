@@ -27,6 +27,7 @@ namespace DrawingExample
         public bool IgnoresDamage = false;
         public float Health = 1f;
         
+        
 
         public BaseGameObject()
         {
