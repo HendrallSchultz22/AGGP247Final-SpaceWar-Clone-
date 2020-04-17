@@ -13,6 +13,11 @@ namespace DrawingExample
     class PlayerClass : BaseGameObject
     {
         public float Force = 60;
+        public float RotationRate = 90;
+        bool  ThrustersActive = true;
+        float ThrusterReactivateTime = .25f;
+        float ThrusterReactivateCounter = 0f; 
+
         public void ShootTorpedo()
         {
             Torpedo T = new Torpedo();
@@ -21,12 +26,7 @@ namespace DrawingExample
             T.Velocity = LinePrimatives.AngleToV2(MathHelper.ToDegrees(sprite.rotation), T.MovementSpeed);
             T.owner = this; 
         }
-        public void PlaceSun()
-        {
-            PlanetObsticleClass p = new PlanetObsticleClass();
-            p.Position = p.SunPos;
-            p.IgnoresDamage = true;
-        }
+      
         public virtual void SetupPlayer1()
         {
             sprite = new Sprite("BigBlue");
@@ -48,10 +48,36 @@ namespace DrawingExample
 
             Collison = new Rectangle(0, 0, (int)(sprite.texture.Width * sprite.scale), (int)(sprite.texture.Height * sprite.scale));
         }
-       
+
+        public void AddForce(GameTime gametime)
+        {
+            if (ThrustersActive)
+            {
+                ThrustersActive = false;
+                Vector2 direction = new Vector2((float)Math.Cos(Rotation), (float)Math.Sin(Rotation));
+                Velocity += direction * Force;
+                // also  LinePrimatives.AngleToV2(Rotation, Force)
+            }
+        }
+
+        public void AddRotation(GameTime gametime, float direction)
+        {
+            Rotation += direction * RotationRate * (MathHelper.Pi / 180) * (gametime.ElapsedGameTime.Milliseconds/1000.0f);
+        }
 
         public override void Update(GameTime gameTime)
         {
+            if (ThrustersActive == false)
+            {
+                //Console.WriteLine("milli: " + gameTime.ElapsedGameTime.Milliseconds); 
+                ThrusterReactivateCounter += (gameTime.ElapsedGameTime.Milliseconds / 1000.0f); 
+               
+                if (ThrusterReactivateCounter > ThrusterReactivateTime )
+                {
+                    ThrusterReactivateCounter = 0;
+                    ThrustersActive = true; 
+                }
+            }
 
             if (sprite.position.X > ScreenSize.X)
             {

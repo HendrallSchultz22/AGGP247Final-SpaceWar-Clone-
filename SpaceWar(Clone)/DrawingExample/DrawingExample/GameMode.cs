@@ -26,11 +26,17 @@ namespace DrawingExample
         public PlayerClass player1;
         public PlayerClass player2;
 
+        int P1Wins = 0;
+        int P2Wins = 0;
+
+
         public Vector2 Player1StartLoc = new Vector2(80, 500);
         public Vector2 Player2StartLoc = new Vector2(1220, 465);
 
-        bool ThrustersActive1 = true;
-        bool ThrustersActive2 = true;
+        public bool EndGameState = false;
+        float EndGameWaitTime = 5.0f;  // in seconds 
+        float EndGameWaitTimeCounter = 0f;
+        string EndGameResultString = ""; 
 
         public Sprite Starfield;
         public bool SunOn = true;
@@ -80,7 +86,12 @@ namespace DrawingExample
 
         void SetupScene()
         {
-            ClearScene(); 
+            // Setting up Internals 
+            ClearScene();
+            EndGameState = false;
+            EndGameWaitTimeCounter = 0f;
+            EndGameResultString = "";
+
 
             player1 = new PlayerClass();
             player1.Rotation = 0;
@@ -118,47 +129,31 @@ namespace DrawingExample
 
             if (IsKeyReleased(Keys.Space))
             {
-                
-                if(SunOn == true)
+
+                if (SunOn == true)
                 {
                     SunOn = false;
-                    player1.PlaceSun();
-                    
+                    PlaceSun();
+
                 }
-                      
+
             }
 
-            
+
             //BigBlueShip Controls.
-            if (IsKeyPressed(Keys.W))
+            if (IsKeyHeld(Keys.W))
             {
-                if (ThrustersActive1)
-                {
-                    var direction = new Vector2((float)Math.Cos(player1.Rotation), (float)Math.Sin(player1.Rotation));
-                    player1.Velocity += direction * player1.Force;
-                    ThrustersActive1 = false;
-                    if (ThrustersActive1 == false)
-                    {
-                        float currentTime = 0f;
-                        currentTime += (float)gameTime.ElapsedGameTime.TotalSeconds;
-                        if (currentTime > 5)
-                        {
-                            ThrustersActive1 = true;
-                            currentTime = 0;
-                        }
-                       
-                    }
-                }
+                player1.AddForce(gameTime);
             }
-            if (IsKeyPressed(Keys.Q))
+            if (IsKeyHeld(Keys.A))
             {
-                player1.Rotation -= 15 * (MathHelper.Pi / 180);
+                player1.AddRotation(gameTime, -1f);
             }
-            if (IsKeyPressed(Keys.E))
+            if (IsKeyHeld(Keys.D))
             {
-                player1.Rotation += 15 * (MathHelper.Pi / 180);
+                player1.AddRotation(gameTime, 1f);
             }
-            if (IsKeyPressed(Keys.R))
+            if (IsKeyPressed(Keys.S))
             {
                 //Console.WriteLine("P1 - Shoot");
                 player1.ShootTorpedo();
@@ -166,53 +161,62 @@ namespace DrawingExample
 
 
             //BigRedShip Controls.
-            if (IsKeyPressed(Keys.I))
+            if (IsKeyHeld(Keys.I))
             {
-                if (ThrustersActive2)
-                {
-                    var direction = new Vector2((float)Math.Cos(player2.Rotation), (float)Math.Sin(player2.Rotation));
-                    player2.Velocity += direction * player2.Force;
-                    ThrustersActive2 = false;
-                    if(ThrustersActive2 == false)
-                    {
-                        int count = 0;
-                        float currentTime = 0f;
-                        float duration = 0f;
-                        currentTime += (float)gameTime.ElapsedGameTime.TotalSeconds;
-                        if(currentTime >= duration)
-                        {
-                            count++;
-                        }
-                        if(count >= 5)
-                        {
-                            ThrustersActive2 = true;
-                            count = 0;
-                            
-                        }
-                    }
-                }
-                
+                player2.AddForce(gameTime);
             }
-            if (IsKeyPressed(Keys.U))
+            if (IsKeyHeld(Keys.J))
             {
-                player2.Rotation -= 7 * (MathHelper.Pi / 180);
+                player2.AddRotation(gameTime, -1f);
             }
-            if (IsKeyPressed(Keys.O))
+            if (IsKeyHeld(Keys.L))
             {
-                player2.Rotation += 7 * (MathHelper.Pi / 180);
+                player2.AddRotation(gameTime, 1f);
             }
-            if (IsKeyPressed(Keys.Y))
+            if (IsKeyPressed(Keys.K))
             {
                 //Console.WriteLine("P2 - Shoot");
                 player2.ShootTorpedo();
             }
-            
+
+            if (EndGameState)
+            {
+                EndGameWaitTimeCounter += (gameTime.ElapsedGameTime.Milliseconds / 1000.0f);
+                if (EndGameWaitTimeCounter > EndGameWaitTime)
+                {
+                    
+                    SetupScene();
+                }
+            }
+            else // Check for a Winner
+            {
+                if (player1.isActive == false && player2.isActive == true)
+                {
+                    EndGameResultString = "Player 2 is the Winner! ";
+                    P2Wins++; 
+                    EndGameState = true;
+                }
+
+                if (player2.isActive == false && player1.isActive == true)
+                {
+                    EndGameResultString = "Player 1 is the Winner! ";
+                    P1Wins++; 
+                    EndGameState = true;
+                }
+            }
 
 
             // #### HUD ####
             hud.Update(gameTime); 
              
 
+        }
+
+        public void PlaceSun()
+        {
+            PlanetObsticleClass p = new PlanetObsticleClass();
+            p.Position = p.SunPos;
+            p.IgnoresDamage = true;
         }
 
         protected override void BackGroundDraw(GameTime gameTime)
@@ -234,26 +238,21 @@ namespace DrawingExample
 
         protected override void HudDraw(GameTime gameTime)
         {
-            // ######
-            // This is where you are drawing your Hud Elements. 
-            // #### HUD ####
-            // Your original code has been replaced with a call to the HUD Class... 
+           
             hud.Draw(spriteBatch);
-            if(player1.isActive == false && player2.isActive == true)
+
+            string P1 = "P1: " + P1Wins;
+            string P2 = "P2: " + P2Wins;
+
+            spriteBatch.DrawString(New, P1, new Vector2(250, 100), Color.Azure);
+            spriteBatch.DrawString(New, P2, new Vector2(750, 100), Color.Azure);
+
+
+
+
+            if (EndGameState)
             {
-                spriteBatch.DrawString(New, "Player 2 is the Winner! " ,
-                new Vector2(550, 400), Color.Azure);
-                
-            }
-            if (player2.isActive == false && player1.isActive == true)
-            {
-                spriteBatch.DrawString(New, "Player 1 is the Winner! ",
-                new Vector2(550, 400), Color.Azure);
-            }
-            if(player1.isActive == false && player2.isActive == false)
-            {
-                spriteBatch.DrawString(New, "Its a Tie!! ",
-                new Vector2(550, 400), Color.Azure);
+                spriteBatch.DrawString(New, EndGameResultString, new Vector2(550, 400), Color.Azure);
             }
 
         }
