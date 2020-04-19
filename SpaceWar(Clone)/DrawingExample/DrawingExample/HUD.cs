@@ -48,6 +48,11 @@ namespace DrawingExample
                 new Vector2(10, 30), Color.Azure);
             spriteBatch.DrawString(drawFont, "BigBlueship Position: " + BigBlueVector
                 , new Vector2(10, 5), Color.Azure);
+
+            spriteBatch.DrawString(drawFont, "Controls for Player1: Rotate Left(A), Rotate Right(D)," +
+                " Use Thrusters Forward(W), Shoot Torpedoes(E)", new Vector2(10, 55), Color.Gold);
+            spriteBatch.DrawString(drawFont, "Controls for Player2: Rotate Left(J), Rotate Right(L)," +
+                " Use Thrusters Forward(I), Shoot Torpedoes(U)", new Vector2(10, 80), Color.Gold);
         }
     }
 

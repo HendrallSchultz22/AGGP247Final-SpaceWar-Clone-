@@ -52,7 +52,10 @@ namespace DrawingExample
                 }
 
                 go.Velocity += Gravity * Direction;
-
+                if (Collison.Intersects(go.Collison))
+                {
+                    go.TakeDamage(1f);
+                }
             }
 
         }

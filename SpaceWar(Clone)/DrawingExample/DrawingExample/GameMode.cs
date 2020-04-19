@@ -153,7 +153,7 @@ namespace DrawingExample
             {
                 player1.AddRotation(gameTime, 1f);
             }
-            if (IsKeyPressed(Keys.S))
+            if (IsKeyPressed(Keys.E))
             {
                 //Console.WriteLine("P1 - Shoot");
                 player1.ShootTorpedo();
@@ -173,7 +173,7 @@ namespace DrawingExample
             {
                 player2.AddRotation(gameTime, 1f);
             }
-            if (IsKeyPressed(Keys.K))
+            if (IsKeyPressed(Keys.U))
             {
                 //Console.WriteLine("P2 - Shoot");
                 player2.ShootTorpedo();

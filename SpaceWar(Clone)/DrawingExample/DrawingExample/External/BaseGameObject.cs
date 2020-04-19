@@ -112,8 +112,7 @@ namespace DrawingExample
             // Debug
             if (Collison != null)
             { 
-
-                LinePrimatives.DrawRectangle(spriteBatch, 5, Color.Red, Collison);
+                LinePrimatives.DrawRectangle(spriteBatch, 5, Color.Transparent, Collison);
             }
         }
 
